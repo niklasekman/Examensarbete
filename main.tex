@@ -1,0 +1,639 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Template for lab reports used at STIMA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sets the document class for the document
+% Openany is added to remove the book style of starting every new chapter on an odd page (not needed for reports)
+\documentclass[11pt,swedish, openany]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loading packages that alter the style
+\usepackage[]{graphicx}
+\usepackage{gensymb}
+\usepackage[]{color}
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+
+
+\usepackage{todonotes}
+% Set page margins
+\usepackage[top=100pt,bottom=100pt,left=68pt,right=66pt]{geometry}
+
+% Package used for placeholder text
+\usepackage{lipsum}
+
+% Prevents LaTeX from filling out a page to the bottom
+\raggedbottom
+
+
+\usepackage[swedish]{babel}
+
+% All page numbers positioned at the bottom of the page
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\pagestyle{fancy}
+
+% Changes the style of chapter headings
+\usepackage{titlesec}
+\titleformat{\chapter}
+   {\normalfont\LARGE\bfseries}{\thechapter.}{1em}{\MakeUppercase}
+% Change distance between chapter header and text
+\titlespacing{\chapter}{0pt}{50pt}{2\baselineskip}
+
+% Adds table captions above the table per default
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+% Adds space between caption and table
+\usepackage[tableposition=top]{caption}
+
+% Adds hyperlinks to references and ToC
+\usepackage{hyperref}
+\hypersetup{hidelinks,linkcolor = black} % Changes the link color to black and hides the hideous red border that usually is created
+
+% If multiple images are to be added, a folder (path) with all the images can be added here 
+\graphicspath{ {Figures/} }
+
+\usepackage{natbib}
+
+% Separates the first part of the report/thesis in Roman numerals
+\frontmatter
+\selectlanguage{swedish}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+
+% Maths stuff
+\usepackage{xfrac}
+
+%%%%%% Tillägg Matias:
+\def\waller#1{{\color{blue}\noindent ** Waller kommenterar: #1 ** \\ } }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Starts the document
+\begin{document}
+
+%%% Selects the language to be used for the first couple of pages
+
+
+%%%%% Adds the title page
+\begin{titlepage}
+	\clearpage\thispagestyle{empty}
+	\centering
+	\vspace{1cm}
+
+	% Titles
+	% Information about the University
+	{\normalsize Examensarbete, Högskolan på Åland, Utbildningsprogrammet för elektroteknik \par}
+		\vspace{2cm}
+	{\Huge \textbf{\uppercase{Kraftmätning av vingsegel}}} \\
+	\vspace{0.5cm}
+	{\large \textbf{- Metod för experimentell mätning av ett vingsegels lyftkraft} \par}
+	\vspace{.5cm}
+	{\normalsize Niklas Ekman\par}
+	\vspace{3cm}
+    
+    \centering \includegraphics[scale=0.15]{hahaha.png}
+    
+    \vspace{0.5cm}
+		
+	% Set the date
+	{\normalsize 15-10-2021 \par}
+	
+	\pagebreak
+
+\end{titlepage}
+
+% Adds a table of contents
+\tableofcontents{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Text body starts here!
+\mainmatter
+\chapter{Inledning}\label{chapt:inledning}
+
+Enligt \citep{Khan2021-ev} transporteras 90\% av världens frakt över havet. I.o.m. att krav på sänkta utsläpp ökar måste ustläppen naturligvis minskas även inom shipping. Man ser på olika sätt att minska utsläppen av växthusgaser och konstaterar att hybrida driftsätt som kombinerar vind och förbränning av fossila bränslen kan minska utsläppen med över 30\%. Det konstateras att framdrift med hjälp av vinden kommer att vara en del av framtiden eftersom detta har den största långsiktiga potentialen för att sänka utsläppen.
+
+\section{Bakgrund}
+
+Projektet Oceanbird som utvecklas av ett gemensamt företag mellan Wallenius Marine och Alfa Laval tar steget ännu längre och planen är att bygga ett helt vinddrivet fartyg \citep{Wallenius_Marine2021-gp}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.2]{oceanbird-alone-1920x1080.jpg}
+    \caption{Oceanbird \citep{Wallenius_Marine2021-gp}}
+    \label{fig:oceanbird}
+\end{figure}
+
+Vingsegel har enligt \citep{Milic_Kralj2016-vl} möjligheten att uppnå högst kvot mellan lyftkoefficient och vindmotstånd av de segelriggar som jämförts och är därför de mest intressanta att användas på en båt eller ett fartyg när alternativa driftsätt utvärderas.
+
+Det är inte helt oöverraskande att man t.ex. oftast väljer ett vingsegel även när det handlar om robotsegelbåtar \citep{Enqvist2016-xw}.
+
+Eftersom det antagligen kommer att byggas en hel del båtar med vingsegel i framtiden är det intressant att ta reda på hur riggarna fungerar i praktiken. Vilka givare ger relevanta signaler med tanke på styrning och övervakning och vilka data hjälper till att ta fram bättre modeller av riggarna.
+
+Min egen motivation till att välja ett projekt som anknyter till just vingsegel är mitt långvariga seglingsintresse och förhoppningar om att kunna kombinera det i arbetslivet med intresset för mät- och reglerteknik som jag utvecklat under studierna.
+
+\section{Teoretisk referensram}\label{sect:teori}
+
+Vad som följer är 
+
+\subsection{Vingsegel}\label{subsect:vingsegel}
+
+Ett vingsegel har per definitionen på \citep{Wikipedia_contributors2021-yk} dubbla symmetriska ytor som bildar en vinge jämförbar med en flygplansvinge. Detta till skillnad från det s.k. vanliga seglet som endast skapar en halv vingform ovanifrån sett.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{Sail NACA2412.pdf}
+    \caption{Profiler för en flygplansvinge (ovan) och en konventionellt segel samt mast (under)}
+    \label{fig:vinge_segel}
+\end{figure}
+g
+När det kommer till att jämföra flygplansvingar med vingsegel är det viktigt att beakta den relativa vindhastigheten, d.v.s. vingens hastighet jämfört med den omgivande luftens, som vardera upplever. På grund av förhållandet mellan krafter som motverkar förändringar (tröghet) och friktion (viskositet) hos luften \citep{Benson2021-kn} som beskrivs av ekvation \ref{eqn:Re} beter sig en vinge på olika sätt beroende på hastigheten.
+
+Relativa vindhastigheter för flygplan är ofta långt mycket högre än för vingsegel. En Cessna 172, i figur \ref{fig:cessna}, har en \emph{stallhastighet} på 47 knop, c.a. 87 $\sfrac{\mathrm{km}}{\mathrm{h}}$ eller 24 $\sfrac{\mathrm{m}}{\mathrm{s}}$, med fullt utslag på vingklaffarna \citep{Wikipedia_contributors2022-fm}. Detta betyder att vingen är inställd för största möjliga lyftkraft och att planet inte längre kan öka flyghöjden utan att höja farten \citep{Wikipedia_contributors2022-gk}. Det är ungefär samma hastighet som hastighetsrekordet för en AC72 tävlingskatamaran (fig. \ref{fig:ac72}) \citep{Wikipedia_contributors2021-jo}. Den normala marschfarten för Cessnan, som definitivt inte är något fartvidunder när det kommer till flygplan, är däremot 125 knop, c.a. 232 $\sfrac{\mathrm{km}}{\mathrm{h}}$ eller 64 $\sfrac{\mathrm{m}}{\mathrm{s}}$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{Dreiseitenansicht_Cessna_172.pdf}
+    \caption{Cessna 172 \citep{Murmann2018-ty}}
+    \label{fig:cessna}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.25]{AC72_New_Zealand_Aotearoa_San_Francisco_01.jpg}
+    \caption{Emirates Team New Zealands AC72 Aotearoa i San Franciscobukten \citep{Wikipedia_contributors2021-jo}}
+    \label{fig:ac72}
+\end{figure}
+
+För en båt med ett vingsegel på en ostagad mast gäller det att all kraft från seglet överförs till skrovet via masten. Som jämförelse är den mer vanligen förekommande bermuda- eller marconiriggade segelbåten (figur \ref{fig:masttyper} t.v.) utrustad med en mast som spänns mot skrovet m.hj.a. vant i tvärskeppsriktningen som försätter masten under kompression i höjdled, och stag längdskepps som fördelar de längdskeppsriktade krafterna till skrovet. Då fördelas kraftöverföringen till skrovet inte bara mellan masten, stagen och vanten utan också i viss mån skoten. Mätmetoden som presenteras i detta arbete skulle bli svår att genomföra på en sådan rigg eftersom krafterna från alla fästpunkter i skrovet då borde mätas. \waller{Fast din metod skulle kanske kunna utnyttjas ganska enkelt även för detta (fler givare och under belastning är riktningarna iallafall för stagen givna? Men det är inte särskilt relevant med tanke på att använda vingseghel?} 
+
+En ostagad mast fästs i nedre ändan i en mastfot monterad på kölstocken och får stöd av däcket och ofta förstärkta däcksbalkar vid däcksgenomföringen. En skiss över hur detta ser ut i en traditionell klinkerbyggd båt liknande skötbåtar ses i figur \ref{fig:ostagad_mast} till vänster.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{Forces on an unstayed mast.png}
+    \caption{Infästning av en ostagad mast (vänster), seglets lyftkraft och reaktionskrafter i skrovet (mitten), mastens böjning (höger) \citep{Brown2021-wb}}
+    \label{fig:ostagad_mast}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{How rig type effects mast weight.png}
+    \caption{Ostagad mast (vänster), mast med vant (mitten), marconirigg med toppvant, spridare och undervant (höger). \citep{Brown2021-wb}}
+    \label{fig:masttyper}
+\end{figure}
+
+Ostagade master på segelfarkoster är f.ö. inget nytt. Som ett exempel är djonkriggen som i sin havsgående form togs fram i Kina under 1000-talets Song-dynasti \citep{Wikipedia_contributors2022-hf}. Orsaken till riggens popularitet är att kraften som krävs för att hantera den är liten, vilket i sin tur leder till att man klarar sig med en mycket liten besättning i förhållande till segelarean \citep{Hasler2015-kc}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{Keith Macgregor junks.jpg}
+    \caption{Djonkriggade båtar i Lamma Channel, Hong Kong \citep{Macgregor1974-cw}}
+    \label{fig:djonk}
+\end{figure}
+
+En av orsakerna till att vingseglet är ostagat är att själva masten behöver kunna roteras, och seglet med den, för att ge seglet en önskad attackvinkel mot vinden. Med en vanlig marconirigg skapas storseglets form genom spänning i storskotet, vilket i sin tur kräver att masten är stagad för att motverka denna spänning. Ett vingsegel håller formen tack vare sin konstruktion vilket är en annan orsak till att masten inte behöver stagas. En ytterligare fördel med segel på ostagade master är att de söker sig till ett neutralt läge när man låter dem svänga fritt i vinden. Seglet har då mycket litet vindmotstånd och detta blir ett effektivt sätt att ''släcka'' seglet.
+
+En sorts mellanting mellan ett vingsegel och ett vanligt segel är en vingmast. Mastens profil är då ellips- eller droppformad och den går att rotera. Aerodynamiskt är detta bättre jämfört med en marconirigg eftersom luftströmmen inte störs lika mycket av masten och skapar då ett mindre luftmotstånd. Denna lösning hittas ofta på tävlingskatamaraner och då med en stagad mast som i mitten av figur \ref{fig:masttyper}. Masten kan inte roteras helt fritt men för de små attackvinklar som seglas med katamaranerna är det tillräckligt. Även lösningar med helt fristående vingmaster som kan roteras har prövats av t.ex. \citep{Sponberg2000-yk}. 
+
+
+\subsection{Vingform}\label{sect:vingform}
+Vingformen som har valts som utgångspunkt i detta arbete är baserad på klassregeln för America's Cup 72. Båtarna är utrustade med ett tvåkomponents vingsegel och kombinerat med bärplan kan de bokstavligen segla fortare än vinden. En utförlig analys av riggen finns i \citep{Chapin2015-zu}, men framförallt intressant för detta arbete är att rapporten inleds med en detaljerad beskrivning av vingseglets geometri som ses i figur \ref{fig:geometri}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=4,scale=1, trim={50 550 300 180},clip]{Chapin et al. 2015 - AERODYNAMIC STUDY OF A TWO-ELEMENTS WINGSAIL FOR HIGH PERFORMANCE MULTIHULL YACHTS.pdf}
+    \caption{AC72 katamaranens vingsegelgeometri \citep{Chapin2015-zu}}
+    \label{fig:geometri}
+\end{figure}
+
+
+Vingen består av ett främre element med vingprofilen NACA 0025 och ett bakre element med profilen NACA 0012. En detaljerad beskrivning av NACA-profiler finns i \citep{Enqvist2016-xw} men för detta arbete är de mest väsentliga egenskaperna att de två inledande nollorna i profilens kod betyder att det handlar om symmetriska profiler. De två sista siffrorna anger profilens maximala bredd i procent av vingelementets längd. Det främre elementet är således ungefär dubbelt så brett som det bakre.
+
+
+En viktig egenskap i seglets konstruktion som främst påverkar dess stallkarakteristik är mellanrummet mellan det främre och det bakre elementet. I \citep{Chapin2015-zu} påvisas det ett olinjärt förhållande mellan vindmotståndet, lyftkraften och mellanrummets storlek. I CFD-simuleringar har det visat sig att seglet tappar lyftförmågan mer abrupt när det bakre elementets vinkel i förhållande till det främre är liten. När vinkeln är större blir även mellanrummet större vilket gör att det kommer in en färsk laminär luftström som följer den övre sidan av det bakre elementet där det i det förstnämnda fallet bildas en turbulent luftström. 
+
+\subsection{Aerodynamik}\label{subsect:aerodynamik}
+
+Ett segel, en flygplansvinge eller ett vingsegel skapar en lyftkraft som är beroende på dess form, den relativa hastigheten i förhållande till fluiden (i detta fall luften) och attackvinkeln mot flödet.
+
+Den totala framdrivande kraften för båten påverkas även av en komponent som skapas av kölen. Denna kompenserar för seglets kraft i sidled och motverkar den framdrivande komponenten från seglet.
+
+Kölens lyftkraft skapas av att båten inte färdas i stävens riktning utan mer eller mindre driver sidledes. Detta gör att kölen har en attackvinkel $\lambda$ mot vattnet, precis som seglet har en attackvinkel $\alpha$ mot vinden \citep{Waller_undated-el}.
+
+Seglets lyftkraft gör att båten kränger tack vare den hävarm som verkar från seglets aerodynamiska centrum.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=6,scale=1.8, trim={70mm 190mm 70mm 50mm},clip]{Waller et al. - Autonomous rigid-wing sailboats—Force balances for monitoring sailing performance [Unpublished manuscript].pdf}
+    \caption{Skenbar vind $\vec{v}_{AW}$, aerodynamisk kraft $\vec{F}_a$ och dess komponenter lyftkraften $\vec{F}_{l,a}$ samt vindmotståndet $\vec{F}_{d,a}$, framdrivande kraft från seglet $\vec{F}_{f,a}$ och sidokraften $\vec{F}_{s,a}$ \citep{Waller_undated-el}}
+    \label{fig:krafter}
+\end{figure}
+
+Ekvation \ref{eqn:Fl} kan användas för att beräkna seglets lyftkraft utifrån luftens densitet $\rho_a$, den skenbara vindens hastighet $v_{AW}$, vingens area $A_s$ och lyftkoefficienten $C_l$ för vingprofilen \citep{Waller_undated-el}. Värt att märka är att $A_s$ inte är vingens ytarea utan arean av dess silhuett \citep{Enqvist2016-xw}.
+
+\begin{equation}
+    F_{l,a} = \frac{1}{2} \rho_a C_l A_s v_{AW}^2 
+    \label{eqn:Fl}
+\end{equation}
+
+$C_l$ tas fram antingen experimentellt i vintunnel eller genom simulering vid olika attackvinklar av vingen mot luftströmmen. Koefficienten gäller för ett visst Reynoldstal, $Re$, som kan ses som en skalfaktor \citep{Enqvist2016-xw} som beaktar en karakteristisk dimension som oftast är vingens längd i tvärsnittet $L$, fluidens hastighet $v$ och fluidens dynamiska viskositet $\mu$ \citep{Waller_undated-el}. 
+
+\begin{equation}
+    Re = \frac{vL}{\mu}
+    \label{eqn:Re}
+\end{equation}
+
+Genom att bryta ut $v$ ur ekv. \ref{eqn:Re} och med insättning av $L$, $\mu$ och $Re$ som motsvarar vingen i fråga, de rådande väderomständigheterna och Reynoldstalet som $C_l$ beräknats vid fås den skalenliga hastigheten.
+
+För en mindre vinge än den som experimentet utförts med, givet samma $\mu$ och $Re$, fås en högre hastighet. Egentligen är det då endast denna hastighet som $C_l$ kan förväntas stämma vid. 
+
+Vid små $Re$, i ordningen 50 000 till 500 000, har man fått ett förhållandevis mindre $C_l$ än vid större $Re$ för samma vingprofil \citep{Enqvist2016-xw}. Därför är det inte godtyckligt vilken tabell över $C_l$ för en given profil som används som grund när ekv. \ref{eqn:Fl} används för att räkna ut lyftkraften för ett vingsegel.
+
+I \citep{Sheldahl1981-mt} finns tabeller för olika NACA-profiler vid olika $Re$. I figur \ref{fig:cl_re_comp} nedan jämförs $C_l$ för profilen NACA0012 vid $Re$ 40 000, 360 000 och 1 000 000.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{naca0012_cl_re_comp.pdf}
+    \caption{$C_l$ som funktion av attackvinkel $\alpha$ för olika $Re$}
+    \label{fig:cl_re_comp}
+\end{figure}
+
+Kurvorna är lika för $\alpha$ under 6° och över 30°. Vingseglen används ofta med små attackvinklar och det är inte orimligt att attackvinkeln kunde ligga mellan 10° - 13°, där skillnaden är som störst mellan kurvorna.
+
+TODO 
+
+
+\subsection{Mekanik}\label{subsect:mekanik}
+\waller{Rubrik? Handlar mera om mätning av töjning/längförändring (förvisso orsakade av krafetr som påverkar mätobjektet, men texten handlar inte särskilt mycket om mekanik). Bra skrivet för övrigt!}
+
+När en kropp böjs som resultat av påverkan från en yttre kraft töjs en sida ut medan den motsatta trycks ihop. Detta betyder en längdändring som på den ena sidan är positiv och negativ på den motsatta sidan. Töjningen uttrycks som ett enhetslöst tal $\varepsilon$ som beskriver förhållandet mellan längdförändringen $\Delta l$ och den ursprungliga längden $l$ (ekv. \ref{eqn:tojning}) \citep{Lindahl1996-ye}.
+
+\begin{equation}
+    \varepsilon = \frac{\Delta l}{l}
+    \label{eqn:tojning}
+\end{equation}
+
+Ett annat uttryck för $\varepsilon$ än det i ekv. \ref{eqn:tojning} ses nedan i ekv. \ref{eqn:tojning2}. Elasticitetsmodulen $E$ är en materialkonstant som är känd för t.ex. olika stållegeringar. För kompositmaterial såsom en kolfibermast är detta en osäker parameter eftersom den då beror på konstruktionssättet och använda material.
+
+\begin{equation}
+    \varepsilon = \frac{\sigma}{E}
+    \label{eqn:tojning2}
+\end{equation}
+
+Kroppen som böjs utsätts för en inre spänning $\sigma$ som är förhållandet mellan böjmomentet $M_b$ som den yttre kraften skapar och böjmotståndet $W_b$ som beror på kroppens geometri i tvärsnittet (ekv. \ref{eqn:spanning}).
+
+\begin{equation}
+    \sigma = \frac{M_b}{W_b}
+    \label{eqn:spanning}
+\end{equation}
+
+
+Om masten exempelvis är fastspänd i ena ändan och belastas med en punktlast $F$ i den fria ändan kan ekvation \ref{eqn:bojmoment} nedan användas för att få ut $M_b$.
+
+\begin{equation}
+    M_b = Fl
+    \label{eqn:bojmoment}
+\end{equation}
+
+För ett rör såsom masten i detta arbete beskrivs $W_b$ av ekvation \ref{eqn:bojmotstand} där $d_1$ är den inre diametern och $d_2$ är den yttre diametern.
+
+\begin{equation}
+    W_b = \frac{\pi}{32}\cdot\frac{d_2^4-d_1^4}{d_2}
+    \label{eqn:bojmotstand}
+\end{equation}
+
+Så länge som förhållandet mellan $\sigma$ och $\varepsilon$ är linjärt kan utböjningen $\delta$ bestämmas med lätthet. För samma belastningsfall som för ekv. \ref{eqn:bojmoment} ges $\delta$ av ekv. \ref{eqn:utbojning}. Samma ekvation kan användas för att uppskatta $E$ utifrån experimentell data. Tröghetsmomentet $I_x$ för ett rör ges av ekvation \ref{eqn:troghet}.
+
+\begin{equation}
+    \delta = \frac{Fl^3}{3EI_x}
+    \label{eqn:utbojning}
+\end{equation}
+
+\begin{equation}
+    I_x = \frac{\pi}{64}(d_2^4-d_1^4)
+    \label{eqn:troghet}
+\end{equation}
+
+TODO
+
+\subsection{Kraftmätning med töjningsgivare}\label{subsect:kraftmätning}
+
+En töjningsgivare består av en tunn metalltråd mellan två tunna plastskikt. Givaren limmas på objektet vars töjning man önskar mäta. Underlagets längdförändring kommer att kunna avläsas som en ändring i metalltrådens resistans. Förhållandet mellan den ursprungliga resistansen $R$ och förändringen i resistans $\Delta R$ kallas den relativa resistansförändringen $r$.
+
+\begin{equation}
+    r = \frac{\Delta R}{R}
+    \label{eqn:rel_res}
+\end{equation}
+
+Förhållandet mellan $r$ och töjningen $\varepsilon$ från ekvation \ref{eqn:tojning} ger givarfaktorn $k$.
+
+\begin{equation}
+    k = \frac{r}{\varepsilon}
+    \label{eqn:gauge_factor}
+\end{equation}
+
+Givaren har en temperaturkänslighet som beror på metalltrådens materialegenskaper. Längdförändringen som ska mätas är väldigt liten vilket också ger en väldigt liten ändring i resistans. För att kunna använda töjningsgivare i praktiken kopplas de i en bryggkoppling som både råder bot på problemet med temperaturkänsligheten och ökar förstärkningen av givarutslaget. Helst kopplas fyra givare i bryggan för att få 4 gångers förstärkning och temperaturkompensering.
+
+I figur \ref{fig:matbrygga} är givarna representerade som motstånden 1 till 4. Givare 1 och 3 placeras bredvid varandra på en sida av mätobjektet och givare 2 och 4 placeras på den motsatta sidan så att givare 2 är under givare 1 och givare 4 är under givare 3. $R_0$ och $R_b$ är givarnas nominella resistans och i fallet att alla givare är av samma typ kan det förutsättas att $R_0 = R_b$. $r$, $p$, $q$ och $s$ är förändringen i resistans tack vare töjningen för de fyra givarna. Med en känd matningsspänning $U$ kan obalansspänningen $U_{ao}$ beräknas med ekvation \ref{eqn:obalansspanning} förutsatt att $r$, $p$, $q$ och $s$ är små \citep{Lindahl1996-ye}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{Mätgivare_f4_6_p53.png}
+    \caption{Bryggkoppling med fyra givare \citep{Lindahl1996-ye}}
+    \label{fig:matbrygga}
+\end{figure}
+
+\begin{equation}
+    U_{ao} \approx \frac{U}{4}(r+q-p-s)
+    \label{eqn:obalansspanning}
+\end{equation}
+
+Om $r$ och $q$ ger ett lika stort positivt utslag och både $p$ och $s$ ger ett negativt utslag av samma storlek kan uttrycket förenklas ytterligare till
+
+\begin{equation}
+    U_{ao} \approx Ur
+    \label{eqn:obalansspanning_}
+\end{equation}
+
+Med en brygga som beskrivs ovan kan man få fram böjningen av masten i en riktning, antingen transversellt eller longitudinellt. Två bryggor måste monteras vinkelrätt mot varandra för att kunna mäta i båda riktningarna samtidigt. Problem kan förväntas med att använda enkla töjningsgivare för att mäta böjning diagonalt mellan de två bryggorna eftersom givarna har begränsad känslighet sidledes. Detta förväntas dock kunna kalibreras bort.
+
+Obalansspänningen $U_{ao}$ från bryggan är fortfarande väldigt liten i förhållande till matningsspänningen $U$. Det handlar vanligen om några mV för $U_{ao}$ då $U$ är kring 5 V. En förstärkare behövs därför och de används oftast tillsammans med en AD-omvandlare, i sin tur kopplad till en mikrokontroller.
+
+
+\section{Syfte}\label{chapt:syfte}
+I arbetet ligger fokus på att göra det möjligt att undersöka seglets bidrag till den totala framdrivande och krängningsskapande kraften. Skrovets och kölens bidrag tas inte i beaktande.
+
+Som det i kapitel \ref{subsect:aerodynamik} framkommer är det inte helt problemfritt att förlita sig på lyftkraftsberäkningar m.hj.a. ekv. \ref{eqn:Fl}. Kurvorna i fig. \ref{fig:cl_re_comp} stämmer bara för ett vingsegel bestående av ett vingelement. Konstrueras seglet av flera element behövs data om hela seglets egenskaper som inte direkt går att härleda från kurvorna för enskilda element. Skilda kurvor behövs också för olika relativa vinklar mellan det främre och det bakre elementet.
+
+En enkel tvådimesionell modell som beskriver båten med köl och seglet vid fortfarighet såsom den som nämnts tidigare under avsnitt \ref{subsect:aerodynamik} kan inte svara på frågor om vad som händer i en verklig situation när båten kränger. En modell som tar detta i beaktande blir mer komplex och syftet för arbetet är att ta fram en mätmetod som kan ge svar på vad som händer ovanför vattenytan genom experimentell mätning av kraften från seglet.
+
+Med instrumentering av masten kan kraften seglet skapar mätas direkt till skillnad från att förlita sig på skenbar vindriktning och hastighet samt $C_L$ och $C_D$ tabeller.
+
+Tabellerna tar inte heller i beaktande andra rådande omständigheter och beräkning av seglets bidrag till krängning eller krängningens bidrag till seglets lyftkraft går inte att härleda direkt från dem.
+
+För segeldrivna farkoster finns det en optimal krängningsvinkel, undersökt av \citep{Pennanen2016-ev}, och upprätthållandet av denna kunde göras noggrant med hjälp av mätmetoden som presenteras i arbetet. Dessutom är det för bemannade farkoster till en början en bekvämlighetsfråga med en för stor krängningsvinkel och för fraktfartyg blir denna snabbt en säkerhetsrisk.
+
+\section{Begränsningar}\label{chapt:begransningar}
+
+Arbetet begränsas till mekanisk konstruktion och uppbyggnaden av tillhörande mätsystem. Mer specifikt läggs tyngdpunkten på att bygga och analysera utrustningen för att kalibrera töjningsgivarna på masten.  
+
+Utrustningen för att göra egentliga mätningar, mätriggen, har planerats. Inga mätningar med denna utrustning har utförs inom ramen för arbetet. Den ursprungliga planen omfattade förhoppningar om att kunna utföra mätningar även med seglet. Men p.g.a. omfattningen av de teoretiska och praktiska momenten för enbart kalibreringen var fortsatta mätningar tidsmässigt inte möjliga att genomföra och analysera.
+
+\chapter{Metod}\label{chapt:metod}
+
+Arbetet inleds med  ett planeringsskede genom att göra en 3D CAD-modell av ett vingsegel och två olika anordningar för mätningar. En för att kalibrera töjningsgivarna på masten och en för att utföra själva kraftmätningarna.
+
+Masten består av ett kolfiberkompositrör och töjningsgivare monteras på denna. För kalibrering behövs en speciell anordning, \emph{jigg}, vars konstruktion ses i figur \ref{fig:jigg}. I denna kan masten böjas åt fyra olika håll genom att hänga upp en känd vikt fäst i röret via ett block. Genom att läsa av alla givare när röret endast böjs åt ett håll i taget kan möjliga fel i mätningarna kalibreras bort.
+
+Metoden med töjningsgivare på masten är inspirerad av mätningar gjorda i \citep{Pellicioli2010-mg} där kraferna mättes för en segelbåt klass 420 med syftet att göra mer noggranna hållfasthetsberäkningar.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.7]{Calibration jig v14.png}
+    \caption{Kalibreringsjigg för töjningsgivare}
+    \label{fig:jigg}
+\end{figure}
+
+Själva seglet och en artikulerad plattform är också planerade att konstrueras. Masten kan roteras, vingseglets bakre element kan vinklas i förhållande till det främre och hela seglet kan roteras horisontellt för att simulera krängning. Seglet är konstruerat helt genom 3D-utskrifter.
+
+För att programmatiskt kunna artikulera mätutrustningen behövs servomotorer med tillräckligt vridmoment. Dessa är konstruerade utav likströmsmotorer med snäckväxel som ger hög utväxling och liten möjlighet till att drivas i backriktningen, vilket får komponenterna att hålla sin position trots yttre påfrestningar. En vanligt förekommande sådan kombination av motor och växellåda finns i vindrutetorkare för bilar. Motorerna är kopplade till en 12 V drivenhet och den utgående axeln är försedd med en magnetisk encoder. Detta kombinerat med en mikrokontoller som sköter positionsregleringen blir en billig och framförallt effektiv servostyrning.
+
+\chapter{Process}\label{chapt:process}
+\waller{Som rubrik kanske Design och konstruktion?}
+
+Processen av att planera och bygga utrustningen har omfattat en markant del av tidsåtgången i arbetet. Medan kalibreringen tog ett par eftermiddagar slukade det förutnämnda månader. Därför anses en beskrivning av hur det hela gick från plan till förverkligande vara viktig och förhoppningsvis intressant.
+
+Mättekniskt 
+
+De mekaniska lösningarna för mätutrustningen är framtagna med hjälp av Autodesk Fusion 360 och en FDM 3D-skrivare. Vingen är förutom servomotorn och masten framställd som en 3D-utskrift. Arbetet med de mekaniska lösningarna kring seglet har avsiktligen valts att förverkligas med denna s.k. \emph{rapid prototyping}-teknik för att iterativt kunna söka fram en optimal design.
+
+Arbetssättet har m.a.o. varit att rita 3D CAD-modeller som sedan skrivits ut med 3D-skrivaren varefter justeringar av modellen har gjorts innan nästa iteration av 3D-utskrifter. Exempelvis är kugghjul relativt svåra att skriva ut med en FDM-skrivare eftersom de första lagren av plast sjunker ihop och blir bredare än vad som avsetts. Detta kan i begränsad mån motverkas i \emph{slicer}-programmet. Men det mest effektiva sättet är att helt enkelt fasa kanterna som kommer att ligga mot utskriftsytan i 3D-modellen.
+
+Prototyper av servostyrningen av mätriggen har byggts enligt samma princip som vingen; en iterativ process som förutom det mekaniska även omfattat design av en regulator för servons position.
+
+De följande underrubrikerna behandlar processen i större detalj.
+
+\section{Mättekniska lösningar}\label{subsect:mätteknlosn}
+
+En första prototyp av en mätbrygga på ett kolfiberrör gjordes i ett tidigt skede för att försäkra att den praktiska delen av projektet överhuvudtaget skulle kunna genomföras. I denna prototyp användes en brygga bestående av fyra töjningsgivare. De slutliga mätningarna skulle behöva två mätbryggor med sammanlagt åtta givare monterade vinkelrätt mot varandra som det konstaterats i avsnitt \ref{subsect:kraftmätning}.
+
+Kolfiberröret för prototypen fanns i form av en sektion av ett teleskopmetspö. Färgen slipades bort där bryggan skulle fästas och ett tunnt lager epoxy ströks på. När härdningen börjat och ytan blivit klibbig lades töjningsgivarna på plats. Efter några minuter när epoxyn stelnat löddes ledare till kontaktytorna på givarna. Innan epoxyn under givarna härdat helt ströks ett nytt tjockare lager över givarna för att skydda dem och som avlastning för ledarna. Resultatet kan ses i figur \ref{fig:proto_brygga}.
+
+Ett HX711-förstärkarchip på ett färdigt kretskort användes för att få in mätdata till en arduinokompatibel mikrokontroller som i sin tur skickade vidare data till en dator via seriell kommunikation över USB.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.25]{proto_brygga.jpg}
+    \caption{Prototyp av mätbrygga kopplad till HX711-chip och mikrokontroller}
+    \label{fig:proto_brygga}
+\end{figure}
+
+I figur \ref{fig:proto_meas} nedan ses det första testet av mätbryggan. När röret böjdes åt ena hållet gav HX711-chipet positiva värden och vid böjning åt motsatta hållet erhölls negativa värden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5]{Metspö.png}
+    \caption{Okalibrerade mätvärden från prototyp av mätbrygga på kolfiberrör som funktion av inlästa samplingar}
+    \label{fig:proto_meas}
+\end{figure}
+
+För den slutliga versionen användes ett tunnare kolfiberrör och fysiskt mindre töjningsgivare. Givarna hade en lägre nominell resistans på 120 $\mathrm{\Omega}$ jämfört med prototypens 350 $\mathrm{\Omega}$. Resonemanget bakom valet var att givare med lägre resistans är mindre känsliga och eftersom det tunnare röret töjs och komprimeras mer vid böjning när det påverkas av samma kraft jämfört med det tjockare röret skulle de mindre känsliga givarna ändå ge goda resultat.
+
+För att få en så noggrann positionering av givarna som möjligt skrevs en mall ut på en bit maskeringstejp med hjälp av en bläckstråleskrivare. Som kan ses i figur \ref{fig:mast_1} fästes tejpbiten på röret och mittenpartiet där givarna skulle sitta skars loss med en skalpell. Hatchmarkerade områden på mallen visar var givarna ska sitta.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5, trim={0mm 18mm 60mm 50mm},clip]{IMG_0446_korr.jpg}
+    \caption{Mall för positionering av givare}
+    \label{fig:mast_1}
+\end{figure}
+
+Givarna fästes med epoxy som på prototypen (fig. \ref{fig:mast_2} och \ref{fig:mast_3}). De mindre givarna hade färdigt fastlödda tunna ledare av lackad koppartråd vilket var tacksamt då de inte behövde utsättas för värme efter monteringen.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5, trim={15mm 28mm 55mm 80mm},clip]{IMG_0447_korr.jpg} % left bottom right top
+    \caption{Töjningnsgivarna fastlimmade}
+    \label{fig:mast_2}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5, trim={0mm 10mm 40mm 60mm},clip]{IMG_0448_korr.jpg} % left bottom right top
+    \caption{Ett skyddande epoxylager har applicerats på givarna}
+    \label{fig:mast_3}
+\end{figure}
+
+Eftersom även denna version av masten kan konstateras vara en sorts prototyp monterades bitar av en stiftlist i ändorna på koppartråden från givarna. Detta gjorde det möjligt att mäta givarnas nominella resistans för att se att de fortfarande var hela utan att klämma sönder eller dra av koppartråden.
+
+Ett försök med att koppla mätförstärkarchipet till bryggans stift med s.k. dupont-kontakter gjordes också. Det visade sig däremot att fjäderkraften i kontakterna inte var tillräcklig och det uppstod variationer i resistansen när röret böjdes. Detta gjorde att mätvärdet inte återvände helt efter en böjning utan det blev ett olika stort bestående fel beroende på hur röret böjdes. Denna metod användes i den första prototypen, men visade sig inte fungera alls i detta fall.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5, trim={20mm 50mm 20mm 50mm},clip]{IMG_0449_korr.jpg} % left bottom right top
+    \caption{Kontakter gjorda av stiftlist fästa på masten}
+    \label{fig:mast_4}
+\end{figure}
+
+Givarna kopplades därför ihop till två bryggor och sedan vidare till två mätförstärkare med lackad koppartråd. För den sista biten fram till kretskorten användes en bit CAT-5 nätverkskabel som har tvinnade ledare. Resultatet i figur \ref{fig:mast_5} väckte farhågor om problem med kapacitiv verkan p.g.a. den stora arean som trådhärvan tar upp, men detta tycks inte ha påverkat mätresultaten nämnvärt. I fortsättningen kunde det vara bra att använda ett flexibelt mönsterkort på vilket bryggkopplingen görs som limmas på masten såsom givarna.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5, trim={0mm 0mm 0mm 0mm},clip]{IMG_0453_korr.jpg} % left bottom right top
+    \caption{Bryggan kopplad med lackad koppartråd}
+    \label{fig:mast_5}
+\end{figure}
+
+\todo{Labview}
+
+\section{Mekaniska lösningar}\label{subsect:meklosn}
+\waller{Rubrik? Handlar mer om CAD-lösningar?}
+Konstruktionen av kalibreringsjiggen och plattformen för mätriggen planerades att bestå av fyrkantig aluminiumprofil med s.k. T-formade skenor. Denna typ av profil används vanligtvis för att konstruera automationsutrustning för olika ändamål. Med vinklade fästen som skruvas fast med en speciell mutter i skenan kan anordningarna byggas upp snabbt och de går att justera efter montering. Även om en hopsvetsad konstruktion kan vara styvare är de förutnämnda fördelarna något som gör konstruktionsmetoden väldigt attraktiv.
+
+TODO
+
+Profilen visade sig även vara relativt enkel att jobba med i Fusion 360. En färdig CAD-modell fanns att ladda ner från leverantörens hemsida. Denna kunde sedan importeras in i projektfilen och med hjälp av t.ex. \emph{extrude}-kommandot kunde längden justeras.
+
+I stället för att använda \emph{move}-kommandot för att flytta bitarna på plats definierades fästpunkter, s.k. \emph{joints}, som gjorde att modellen förblev parametrisk. Detta betyder att det gick att gå tillbaka i historiken över utförda operationer och ändra på t.ex. längden av en profil utan att modellen går sönder när man återgår till den senaste operationen. Genom att sätta in en fästpunkt i ändan på en profil och fästa en annan i punkten bildas automatiskt en relativ position mellan de två komponenterna. Om den första profilen flyttas eller ändrar längd fästs nästa profil fortfarande vid ändan oavsett vilken den nya absoluta positionen för joint-objektet har blivit.
+
+När komponenter i en Fusion 360-ritning kopieras och sedan klistras in kan man välja mellan att skapa en ny komponent som är helt fristående från den ursprungliga eller som en sorts referens. Ändras originalet kommer referensen också att påverkas av samma operation. Detta påverkar dock inte operationer som har med joints att göra. Fördelarna med att arbeta med referenser är att det i modellen ofta finns flera profiler som är lika långa och görs kopiorna som referenser kommer det att gå snabbt att redigera alla på en gång. När man sedan skapar en ritning utav 3D CAD-modellen och infogar en tabell över komponenter kommer de som kopierats som referenser att samlas på samma rad med en kolumn som anger antalet likadana komponenter. På så vis blir det enklare att göra beställningar när listan över delar automatiskt uppdateras.
+
+Det är främst de ovannämnda funktionerna som har gjort det möjligt att sköta det iterativa arbetet med att planera mätanordningarna i CAD-programmet utan att ha tillgång till profilerna på förhand. 
+
+\section{Servomotorer}\label{subsect:servomotorer}
+
+För att bygga om vindrutetorkarmotorerna till servon användes magnetiska encoders och utvecklingskort med en arduinokompatibel mikrokontroller.
+
+En 3D-utskrift som håller fast den diametriskt polariserade magneten limmades fast på det stora kugghjulet som är kopplat till motorns axel. Ett nytt lock för motorns växelhus som kretskortet med hallgivarchipet kunde fästas vid ritades också upp på basen av en inscannad bild av packningen som satt under det usprungliga locket och skrevs ut. 
+
+För hastighetsreglering av motorn användes en färdig modul som innehöll en H-brygga, specifikt avsedd för att styra likströmsmotorer. Modulen matades med 12 V spänning från ett labbaggregat som kan leverera en maximal ström på 5 A. Mikrokontrollern programmerades att skicka ut en PWM-signal för det önskade pådraget och en binär signal som anger riktningen till modulen.
+
+Med de ovannämnda modifikationerna till motorn fanns det nu en möjlighet till att återkopplat reglera rotationsvinkeln av axeln som sticker ut ur växellådan. Till en början gjordes ett försök med att skriva ett kort program i arduino-miljön med hjälp av ett färdigt bibliotek för PID-reglering och ett för att läsa av vinkeln från hallgivaren över SPI-bussen.
+
+Regulatorn ställdes in för hand och det klarnade snabbt att systemet hade flera olinjära egenskaper. Motorn gick dels fortare åt det ena hållet än det andra och det fanns en markant dödzon vid små värden för styrsignalen. Dessa egenskaper gjorde det svårt att använda någon sorts tumregelsmetod för att komma fram till välfungerande värden för regulatorns förstärkningar utan att ha en modell som beskrev systemet. Det gick att ställa in regulatorn så att den fungerade väl vid antingen stora eller små förändringar av börvärdet men ingen optimal inställning hittades för att klara båda fallen. Ett försök gjordes med att använda olika förstärkningar för olika magnituder på reglerfelet och att introducera en olinjäritet efter regulatorn som fungerade som modell för dödzonen. Regulatorn blev dock ännu svårare att ställa in.
+
+Ett nytt försök gjordes senare med att modellera servon och använda supportpaketet för arduino i simulink för att göra en parameteruppskattning och bygga en regulator på detta vis i stället.
+
+Mikrokontrollern programmerades med ett arduinoprogram som läser in vinkeln från encodern och rapporterar tillbaka värdet över serieporten till datorn. Programmet 
+
+TODO: Resten av stycket från chromebooken
+
+TODO: Problem med flera encoders till samma arduino
+
+
+
+\chapter{Teoretisk beräkning av givarutslag}\label{chapt:teoretisk_berakn}
+
+För att kunna jämföra olika belastningsfall av masten a
+
+Som det konstaterats i kap. \ref{subsect:vingsegel} överförs krafterna från seglet till skrovet via masten. I \citep{Sponberg1983-li} presenteras en metod för att dimensionera fristående vingmaster för fritids- och tävlingssegelbåtar. Hållfasthetsberäkningarna i rapporten är upplagda så att en så stor säkerhetsmarginal som möjligt erhålls.
+
+Belastningen av masten beräknas genom att se mastfoten och däcksgenomföringen som stödpunkter och att applicera punktformade motriktade krafter vid infästningen av bommen och i masttoppen. I figur \ref{fig:fbd_pf} ses en friläggning av belastningsfallet med ungefärliga värden så som de skulle kunna vara för vingseglet som konstrueras som en del av detta arbete.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{mast_fbd_pf.pdf}
+    \caption{Friläggning av masten med punktbelstningar}
+    \label{fig:fbd_pf}
+\end{figure}
+
+De resulterande skjuvkrafts- och böjmomentsdiagrammen ses i figur \ref{fig:moments_pf}. Böjmomentet blir konstant mellan nedre kanten av seglet och däcksgenomföringen. Detta skulle betyda att töjningsgivarna kunde fästas var som helst i detta spann och att man då fick samma mätvärden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7, trim={0 70 0 70},clip]{mast_moments_pf.pdf}
+    \caption{Skjuvkrafts- och böjmomentsdiagram med punktbelastningar}
+    \label{fig:moments_pf}
+\end{figure}
+
+Om man däremot förutsätter att seglet utövar en jämnt fördelad belastning på masten som i friläggningen i figur \ref{fig:fbd_df} fås ett linjärt ökande böjmoment från nedre kanten av seglet till däcksgenomföringen som i figur \ref{fig:moments_df}. I fallet med punktkrafterna blir det maximala böjmomentet 2,9 Nm medan det för den jämnt fördelade kraften blir 1,5 Nm mellan däcksgenomföringen och nedre kanten av seglet. Ur ett dimensioneringsperspektiv fås en större säkerhetsfaktor med punktformade krafter. \waller{Förstår inte: böjmomentet större med punktkrafter, varför är då säkerhetsfaktor större? Eller ändrar man design beroende på vad man antar?}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{mast_fbd_df.pdf}
+    \caption{Friläggning av masten med jämnt fördelad last}
+    \label{fig:fbd_df}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7, trim={0 70 0 70},clip]{mast_moments_df.pdf}
+    \caption{Skjuvkrafts- och böjmomentsdiagram med jämnt fördelad last}
+    \label{fig:moments_df}
+\end{figure}
+
+\chapter{Kalibrering}\label{chapt:kalibrering}
+
+Kalibreringen genomfördes med
+
+Inför kalibreringen 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Masses for polar measurement, 1st quadrant.pdf}
+    \caption{Kända massor för kalibrering och mätning}
+    \label{fig:mass_kalib}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Front - back linear fit.pdf}
+    \caption{Linjär anpassning av mätvärden i fram- och bakriktningen}
+    \label{fig:kalib_fb}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Left - right linear fit.pdf}
+    \caption{Linjär anpassning av mätvärden i vänster- och högerriktningen}
+    \label{fig:kalib_lr}
+\end{figure}
+
+\chapter{Mätresultat}\label{chapt:mätningar}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Measured values.pdf}
+    \caption{Uppmätta värden efter kalibrering}
+    \label{fig:meas}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Polar plot of measured values.pdf}
+    \caption{Polär graf över uppmätta värden efter kalibrering}
+    \label{fig:meas_polar}
+\end{figure}
+
+\chapter{Analys}\label{chapt:analys}
+
+\chapter{Slutsatser}\label{chapt:slutsatser}
+
+
+
+\chapter{Budget}\label{chapt:budget}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1.25]{budget.png}
+    \caption{Budget för arbetet}
+    \label{fig:budget}
+\end{figure}
+
+TODO: uppdatera budget
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography.bib}
+
+\end{document}
