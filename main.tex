@@ -23,8 +23,6 @@
 % Set page margins
 \usepackage[top=100pt,bottom=100pt,left=68pt,right=66pt]{geometry}
 
-% Package used for placeholder text
-\usepackage{lipsum}
 
 % Prevents LaTeX from filling out a page to the bottom
 \raggedbottom
@@ -335,6 +333,8 @@ En töjningsgivare består av en tunn metalltråd mellan två tunna plastskikt. 
     \label{eqn:rel_res}
 \end{equation}
 
+\todo{givarnas uppbyggnad, riktning av töjning och känslighet}
+
 Förhållandet mellan $r$ och töjningen $\varepsilon$ från ekvation \ref{eqn:tojning} ger givarfaktorn $k$.
 
 \begin{equation}
@@ -408,8 +408,7 @@ Själva seglet och en artikulerad plattform är också planerade att konstrueras
 
 För att programmatiskt kunna artikulera mätutrustningen behövs servomotorer med tillräckligt vridmoment. Dessa är konstruerade utav likströmsmotorer med snäckväxel som ger hög utväxling och liten möjlighet till att drivas i backriktningen, vilket får komponenterna att hålla sin position trots yttre påfrestningar. En vanligt förekommande sådan kombination av motor och växellåda finns i vindrutetorkare för bilar. Motorerna är kopplade till en 12 V drivenhet och den utgående axeln är försedd med en magnetisk encoder. Detta kombinerat med en mikrokontoller som sköter positionsregleringen blir en billig och framförallt effektiv servostyrning.
 
-\chapter{Process}\label{chapt:process}
-\waller{Som rubrik kanske Design och konstruktion?}
+\chapter{Design och konstruktion}\label{chapt:design_konstr}
 
 Processen av att planera och bygga utrustningen har omfattat en markant del av tidsåtgången i arbetet. Medan kalibreringen tog ett par eftermiddagar slukade det förutnämnda månader. Därför anses en beskrivning av hur det hela gick från plan till förverkligande vara viktig och förhoppningsvis intressant.
 
@@ -487,7 +486,7 @@ Ett försök med att koppla mätförstärkarchipet till bryggans stift med s.k. 
     \label{fig:mast_4}
 \end{figure}
 
-Givarna kopplades därför ihop till två bryggor och sedan vidare till två mätförstärkare med lackad koppartråd. För den sista biten fram till kretskorten användes en bit CAT-5 nätverkskabel som har tvinnade ledare. Resultatet i figur \ref{fig:mast_5} väckte farhågor om problem med kapacitiv verkan p.g.a. den stora arean som trådhärvan tar upp, men detta tycks inte ha påverkat mätresultaten nämnvärt. I fortsättningen kunde det vara bra att använda ett flexibelt mönsterkort på vilket bryggkopplingen görs som limmas på masten såsom givarna.
+Givarna kopplades därför ihop till två bryggor och sedan vidare till två mätförstärkare med lackad koppartråd. För den sista biten fram till kretskorten användes en bit CAT-5 nätverkskabel som har tvinnade ledare, figur \ref{fig:mast_5}. I fortsättningen kunde det vara bra att använda ett flexibelt mönsterkort på vilket bryggkopplingen görs och limmas på masten såsom givarna. Då skulle man bli av med trådhärvan och kontakterna kring givarna.
 
 \begin{figure}[H]
     \centering
@@ -496,7 +495,11 @@ Givarna kopplades därför ihop till två bryggor och sedan vidare till två mä
     \label{fig:mast_5}
 \end{figure}
 
-\todo{Labview}
+Ett relativt omfattande labviewprogram förbereddes för kalibrering och mätningar med bryggan.
+
+Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man behöver gå igenom för att först samla data för kalibreringen, sedan utföra en linjär anpassning av samlad data och till sist utföra mätningar och lagra data.
+
+\todo{screenshots från labview}
 
 \section{Mekaniska lösningar}\label{subsect:meklosn}
 \waller{Rubrik? Handlar mer om CAD-lösningar?}
@@ -511,6 +514,8 @@ I stället för att använda \emph{move}-kommandot för att flytta bitarna på p
 När komponenter i en Fusion 360-ritning kopieras och sedan klistras in kan man välja mellan att skapa en ny komponent som är helt fristående från den ursprungliga eller som en sorts referens. Ändras originalet kommer referensen också att påverkas av samma operation. Detta påverkar dock inte operationer som har med joints att göra. Fördelarna med att arbeta med referenser är att det i modellen ofta finns flera profiler som är lika långa och görs kopiorna som referenser kommer det att gå snabbt att redigera alla på en gång. När man sedan skapar en ritning utav 3D CAD-modellen och infogar en tabell över komponenter kommer de som kopierats som referenser att samlas på samma rad med en kolumn som anger antalet likadana komponenter. På så vis blir det enklare att göra beställningar när listan över delar automatiskt uppdateras.
 
 Det är främst de ovannämnda funktionerna som har gjort det möjligt att sköta det iterativa arbetet med att planera mätanordningarna i CAD-programmet utan att ha tillgång till profilerna på förhand. 
+
+\todo{kugghjul}
 
 \section{Servomotorer}\label{subsect:servomotorer}
 
@@ -536,11 +541,19 @@ TODO: Problem med flera encoders till samma arduino
 
 \chapter{Teoretisk beräkning av givarutslag}\label{chapt:teoretisk_berakn}
 
-För att kunna jämföra olika belastningsfall av masten a
+En teoretisk beräkning av givarutslaget utifrån kraften som masten belastas med kan användas för att välja töjningsgivare med rätt egenskaper i planeringsfasen och analysera olika belastningsfall när mätdata finns till hands.
 
-Som det konstaterats i kap. \ref{subsect:vingsegel} överförs krafterna från seglet till skrovet via masten. I \citep{Sponberg1983-li} presenteras en metod för att dimensionera fristående vingmaster för fritids- och tävlingssegelbåtar. Hållfasthetsberäkningarna i rapporten är upplagda så att en så stor säkerhetsmarginal som möjligt erhålls.
+Det är inte helt entydigt hur kraften från seglet breder ut sig över längden av masten. Belastningsfallet påverkas av hur seglet fästs vid masten. Illustrationen av loggertseglet i mitten av figur \ref{fig:ostagad_mast} visar en punktlast där rået ligger mot masten i den övre ändan. Vill man gå in i större detalj kan det antas att en viss del av kraften också överförs i punkten där bommen möter masten i den nedre ändan. Det kan också antas att man i figuren har vinden in från babordssidan. Hade situationen varit den motsatta skulle en del av seglet ligga och trycka på mot masten.
 
-Belastningen av masten beräknas genom att se mastfoten och däcksgenomföringen som stödpunkter och att applicera punktformade motriktade krafter vid infästningen av bommen och i masttoppen. I figur \ref{fig:fbd_pf} ses en friläggning av belastningsfallet med ungefärliga värden så som de skulle kunna vara för vingseglet som konstrueras som en del av detta arbete.
+Ju mer utbredd belastningen är över masten desto mindre blir böjmomentet i en given enskild punkt längs den. Böjmomentet är integralen av skjuvkraften som i sin tur beror på hur man valt krafterna i belastningsfallet. Figur \ref{fig:moments_pf} och \ref{fig:moments_df} illustrerar detta.
+
+Det är böjmomentet som tillsammans med materialkonstanter slutligen ger töjningen man mäter med givarna, påvisat av ekvationerna \ref{eqn:tojning2}, \ref{eqn:spanning}, \ref{eqn:gauge_factor} och \ref{eqn:obalansspanning_}. 
+
+När det gäller placeringen och valet av töjningsgivare borde man se till att  givarnas maximala utslag inte mättar AD-omvandlarens förstärkarsteg. Blir utslaget för litet får man problem med kvoten mellan signal och brus.
+
+I \citep{Sponberg1983-li} presenteras en metod för att dimensionera fristående vingmaster för fritids- och tävlingssegelbåtar. Hållfasthetsberäkningarna i rapporten är upplagda så att en så stor säkerhetsmarginal som möjligt erhålls. Eftersom krafterna förutsätts vara punktformiga fås större böjmoment än om man räknat med att seglet fästs längs hela liket i masten och då skulle kunna räknas som en utbredd belastning. Om man räknat enligt det förstnämnda fallet och lagt på en viss säkerhetsmarginal för mastens konstruktion men det verkliga fallet är mer som det senare fallet kommer man att få en ytterligare marginal. Denna marginal är dock inte helt gratis då man får en tyngre mast som påverkar stabiliteten negativt. Ska masten dessutom roteras som i \citep{Sponberg2000-yk} blir lagren som ska stötta rörelsen större, tyngre och framförallt dyrare. När det gäller en ensamsegling runt jorden är kanske extra säkerhetsmarginal att föredra, speciellt då avmastning ofta är orsaken till att den sortens åtaganden måste avbrytas.
+
+Belastningen av masten kan beräknas genom att se mastfoten och däcksgenomföringen som stödpunkter och att applicera punktformade motriktade krafter vid infästningen av bommen och i masttoppen \citep{Sponberg1983-li}. I figur \ref{fig:fbd_pf} ses en friläggning av belastningsfallet med ungefärliga värden så som de skulle kunna vara för vingseglet som planers som en del av detta arbete.
 
 \begin{figure}[H]
     \centering
@@ -558,7 +571,9 @@ De resulterande skjuvkrafts- och böjmomentsdiagrammen ses i figur \ref{fig:mome
     \label{fig:moments_pf}
 \end{figure}
 
-Om man däremot förutsätter att seglet utövar en jämnt fördelad belastning på masten som i friläggningen i figur \ref{fig:fbd_df} fås ett linjärt ökande böjmoment från nedre kanten av seglet till däcksgenomföringen som i figur \ref{fig:moments_df}. I fallet med punktkrafterna blir det maximala böjmomentet 2,9 Nm medan det för den jämnt fördelade kraften blir 1,5 Nm mellan däcksgenomföringen och nedre kanten av seglet. Ur ett dimensioneringsperspektiv fås en större säkerhetsfaktor med punktformade krafter. \waller{Förstår inte: böjmomentet större med punktkrafter, varför är då säkerhetsfaktor större? Eller ändrar man design beroende på vad man antar?}
+Om man däremot förutsätter att seglet utövar en jämnt fördelad belastning på masten som i friläggningen i figur \ref{fig:fbd_df} fås ett linjärt ökande böjmoment från nedre kanten av seglet till däcksgenomföringen som i figur \ref{fig:moments_df}. I fallet med punktkrafterna blir det maximala böjmomentet 2,9 Nm medan det för den jämnt fördelade kraften blir 1,5 Nm mitt emellan däcksgenomföringen och nedre kanten av seglet.
+
+Utifrån diskussionen ovan kan man då med fel valt belastningsfall i planeringsskedet få ett givarutslag som är hälften av det förväntade. Signal till brusförhållandet försämras med det dubbla.
 
 \begin{figure}[H]
     \centering
@@ -574,11 +589,24 @@ Om man däremot förutsätter att seglet utövar en jämnt fördelad belastning 
     \label{fig:moments_df}
 \end{figure}
 
-\chapter{Kalibrering}\label{chapt:kalibrering}
+\chapter{Kalibrering och mätning}\label{chapt:kalibrering}
 
-Kalibreringen genomfördes med
+Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, som diskuteras i avsnitt \ref{subsect:kraftmätning}.
 
-Inför kalibreringen 
+
+
+En kalibrering behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Det slutliga belastningsfallet påverkar m.a.o. hur kraften ska appliceras vid kalibreringen om man senare önskar beräkna en kraft utifrån givarutslag.
+
+Så länge som materialen befinner sig i den elastiska regionen kommer förhållandet mellan $\sigma$ och $\varepsilon$ vara linjärt. Detta betyder att en linjär anpassning av mätvärden kan göras för att få fram en kalibreringsfaktor. 
+
+
+
+
+Kalibreringen genomfördes med hjälp av utrustningen och programvaran som beskrivs i kapitel \ref{subsect:mätteknlosn} \ref{subsect:meklosn}. 
+
+
+
+Inför mätningen förbereddes 9 olika vikter med vilka även kalibreringen utfördes. Vikterna 
 
 \begin{figure}[H]
     \centering
