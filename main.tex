@@ -589,24 +589,25 @@ Utifrån diskussionen ovan kan man då med fel valt belastningsfall i planerings
     \label{fig:moments_df}
 \end{figure}
 
-\chapter{Kalibrering och mätning}\label{chapt:kalibrering}
+\chapter{Experiment}\label{chapt:experiment}
 
 Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, som diskuteras i avsnitt \ref{subsect:kraftmätning}.
 
-
-
-En kalibrering behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Det slutliga belastningsfallet påverkar m.a.o. hur kraften ska appliceras vid kalibreringen om man senare önskar beräkna en kraft utifrån givarutslag.
+Inför kalibreringen monteras masten i kalibreringsjiggen så att bryggorna orienteras vinkelrätt mot de fyra sidorna av jiggens ram. En brygga kan då mäta böjningen i riktningen vänster -- höger och den andra i fram- och bakled ovanifrån sett. Kända vikter hängs en och en från samma punkt på masten via ett av blocken och riktningen, vikten, samt värdet från båda AD-omvandlare sparas i en tabell i kalibreringsprogrammet.
 
 Så länge som materialen befinner sig i den elastiska regionen kommer förhållandet mellan $\sigma$ och $\varepsilon$ vara linjärt. Detta betyder att en linjär anpassning av mätvärden kan göras för att få fram en kalibreringsfaktor. 
 
+När uppmätta kalibreringsvärden för alla vikter i de fyra riktningarna har sparats kan man direkt fortsätta till att göra mätningar eftersom programmet sköter nödvändiga beräkningar bakom kulisserna.
 
+Mätningen med kalibreringsjiggen är tänkt att göras utgående från ett scenario där man förutsätter att masten sitter på en båt. Målet är att kunna rita ett polärdiagram som visar den minskade känsligheten mellan de fyra väderstrecken. Framåtriktningen antas då vara 0°, höger eller styrbord 90°, bakåt 180° och vänster eller babord 270°. I diagrammet som kommer att ritas orienteras också 0° uppåt och 90° åt höger, vinkeln ökar m.a.o. medurs, vilket skiljer sig från hur de trigonometriska funktionerna förhåller sig till enhetscirkeln.
 
+\section{Kalibrering}\label{sect:kalibrering}
 
-Kalibreringen genomfördes med hjälp av utrustningen och programvaran som beskrivs i kapitel \ref{subsect:mätteknlosn} \ref{subsect:meklosn}. 
+Till en början gjordes en kalibrering med två vikter. Kalibrerade värden mättes sedan upp för de fyra väderstrecken, men också för 45°, 135°, 225° och 315°. Dessa mellanliggande vinklar gav en mindre beräknad magnitud än den teoretiska som skulle vara en faktor $\sqrt{2}$ större än massan av en av de lika stora vikterna som hängts via två av blocken i masten.
 
+Det blev klart att det skulle vara av intresse att veta hur givarna beter sig i områden mellan de redan uppmätta vinklarna. Uppskattningen blev att det praktiskt kunde vara genomförbart och tillräckligt att mäta 32 olika vinklar. Detta betydde 9 vikter varav två var lika stora. Mätningen förbereddes genom att räkna ut vilka vikterna behövde vara för att teoretiskt få ett mätvärde på 500 g vid varje vinkel. Resultatet ritades upp i figur \ref{fig:mass_kalib} och användes för att föra protokoll över vilka vinklar som blivit uppmätta.
 
-
-Inför mätningen förbereddes 9 olika vikter med vilka även kalibreringen utfördes. Vikterna 
+Vikterna framställdes genom att fylla $\sfrac{1}{2}$ liters PET-flaskor med vatten tills önskad vikt nåddes. Vikten mättes med en digital köksvåg.
 
 \begin{figure}[H]
     \centering
@@ -614,6 +615,8 @@ Inför mätningen förbereddes 9 olika vikter med vilka även kalibreringen utf�
     \caption{Kända massor för kalibrering och mätning}
     \label{fig:mass_kalib}
 \end{figure}
+
+Kalibreringen sköttes med samma vikter som mätningen planerades att göras med. Detta är orsaken till att mätpunkterna i kalibreringen inte är på jämna avstånd från varandra. För kalibreringen skulle det inte heller behövas så många mätpunkter, men eftersom vikterna fanns tillhands användes alla för varje riktning. Figurerna \ref{fig:kalib_fb} och \ref{fig:kalib_lr} visar resultaten av kalibreringen. Linjernas lutning är lika med faktorn som mätvärdet från AD-omvandlaren måste multipliceras med.
 
 \begin{figure}[H]
     \centering
@@ -629,14 +632,9 @@ Inför mätningen förbereddes 9 olika vikter med vilka även kalibreringen utf�
     \label{fig:kalib_lr}
 \end{figure}
 
-\chapter{Mätresultat}\label{chapt:mätningar}
+\section{Mätresultat}\label{sect:matresultat}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=1]{Measured values.pdf}
-    \caption{Uppmätta värden efter kalibrering}
-    \label{fig:meas}
-\end{figure}
+I figurerna \ref{fig:meas_polar} och \ref{fig:meas} presenteras samma mätdata; de 32 uppmätta punkterna från 0° till 348,25°. Polärdiagrammet i fig \ref{fig:meas_polar} kan vara mer överskådligt utifrån bakgrunden som ges i början av kapitlet.
 
 \begin{figure}[H]
     \centering
@@ -645,11 +643,25 @@ Inför mätningen förbereddes 9 olika vikter med vilka även kalibreringen utf�
     \label{fig:meas_polar}
 \end{figure}
 
-\chapter{Analys}\label{chapt:analys}
+Figur \ref{fig:meas} nedan ger i sin tur en klarare bild av mätutrustningens karaktäristik.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Measured values.pdf}
+    \caption{Uppmätta värden efter kalibrering}
+    \label{fig:meas}
+\end{figure}
+
+\section{Analys}\label{sect:analys}
+
+Det som är mest iögonfallande i speciellt figur \ref{fig:meas}, men också i en polär graf då skalan justerats som i figur \ref{fig:meas_polar}, är att mätpunkterna faller på en linje mellan 0° och 45°, 45° och 90°, o.s.v.
+
+Detta betyder att det går att anpassa en styckevis linjär funktion till mätvärden och använda den för kalibrering av utrustningen. Även om töjningsgivarna är mindre känsliga i sidled blir det kombinerade resultatet från två bryggor vinkelrätt mot varandra linjärt. Detta hade inte varit lätt att förutspå.
 
 \chapter{Slutsatser}\label{chapt:slutsatser}
 
-
+\section{Vidareutveckling}\label{sect:vidareutveckling}
+Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Kalibreringsfaktorerna som programmet räknar ut gäller m.a.o. endast när masten är monterad på exakt samma sätt och när den belastas från samma punkt. Det skulle kunna utforskas om man kunde överföra mätvärden från ett belastningsfall till ett annat förutsatt att de båda motsvarar verkligheten så bra som möjligt. Då kunde t.ex. en bar mast kalibreras och mätningar göras när seglet monterats utan att behöva kalibrera om givarna. Olika fall kunde utforskas genom att montera töjningsgivare på flera ställen längs masten. Viktiga punkter att mäta på är speciellt där förändringar i skjuvkraften förväntas hända.
 
 \chapter{Budget}\label{chapt:budget}
 \begin{figure}[H]
