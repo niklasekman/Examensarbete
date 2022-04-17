@@ -267,8 +267,7 @@ I \citep{Sheldahl1981-mt} finns tabeller för olika NACA-profiler vid olika $Re$
 
 Kurvorna är lika för $\alpha$ under 6° och över 30°. Vingseglen används ofta med små attackvinklar och det är inte orimligt att attackvinkeln kunde ligga mellan 10° - 13°, där skillnaden är som störst mellan kurvorna.
 
-\subsection{Mekanik}\label{subsect:mekanik}
-\waller{Rubrik? Handlar mera om mätning av töjning/längförändring (förvisso orsakade av krafetr som påverkar mätobjektet, men texten handlar inte särskilt mycket om mekanik). Bra skrivet för övrigt!}
+\subsection{Kraftmärning med töjningsgivare vid böjning}\label{subsect:kraftmatning}
 
 När en kropp böjs som resultat av påverkan från en yttre kraft töjs en sida ut medan den motsatta trycks ihop. Detta betyder en längdändring som på den ena sidan är positiv och negativ på den motsatta sidan. Töjningen uttrycks som ett enhetslöst tal $\varepsilon$ som beskriver förhållandet mellan längdförändringen $\Delta l$ och den ursprungliga längden $l$ (ekv. \ref{eqn:tojning}) \citep{Lindahl1996-ye}.
 
@@ -318,8 +317,6 @@ Så länge som förhållandet mellan $\sigma$ och $\varepsilon$ är linjärt kan
     \label{eqn:troghet}
 \end{equation}
 
-\subsection{Kraftmätning med töjningsgivare}\label{subsect:kraftmätning}
-
 En töjningsgivare består av en tunn metalltråd mellan två tunna plastskikt. Givaren limmas på objektet vars töjning man önskar mäta. Underlagets längdförändring kommer att kunna avläsas som en ändring i metalltrådens resistans. Förhållandet mellan den ursprungliga resistansen $R$ och förändringen i resistans $\Delta R$ kallas den relativa resistansförändringen $r$.
 
 \begin{equation}
@@ -327,7 +324,14 @@ En töjningsgivare består av en tunn metalltråd mellan två tunna plastskikt. 
     \label{eqn:rel_res}
 \end{equation}
 
-\todo{givarnas uppbyggnad, riktning av töjning och känslighet}
+De givare som används i detta arbete är av en typ som kallas folietöjningsgivare. I stället för tråden har man använt en metallfolie med ett mönster som kan ses i figur \ref{fig:folietojningsgivare}. En givare orienterad såsom den i figuren är tillverkad för att vara mest känslig för töjning i sidled, d.v.s. vågrätt i bilden. Enligt \citep{Lindahl1996-ye} har töjningsgivarna väldigt liten känslighet i tvärriktningen, bara några procent av huvudriktningen. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5]{folietöjningsgivare.png}
+    \caption{Folietöjningsgivare}
+    \label{fig:folietojningsgivare}
+\end{figure}
 
 Förhållandet mellan $r$ och töjningen $\varepsilon$ från ekvation \ref{eqn:tojning} ger givarfaktorn $k$.
 
