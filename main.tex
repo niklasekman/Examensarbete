@@ -267,7 +267,7 @@ I \citep{Sheldahl1981-mt} finns tabeller för olika NACA-profiler vid olika $Re$
 
 Kurvorna är lika för $\alpha$ under 6° och över 30°. Vingseglen används ofta med små attackvinklar och det är inte orimligt att attackvinkeln kunde ligga mellan 10° - 13°, där skillnaden är som störst mellan kurvorna.
 
-\subsection{Kraftmärning med töjningsgivare vid böjning}\label{subsect:kraftmatning}
+\subsection{Kraftmätning med töjningsgivare vid böjning}\label{subsect:kraftmatning}
 
 När en kropp böjs som resultat av påverkan från en yttre kraft töjs en sida ut medan den motsatta trycks ihop. Detta betyder en längdändring som på den ena sidan är positiv och negativ på den motsatta sidan. Töjningen uttrycks som ett enhetslöst tal $\varepsilon$ som beskriver förhållandet mellan längdförändringen $\Delta l$ och den ursprungliga längden $l$ (ekv. \ref{eqn:tojning}) \citep{Lindahl1996-ye}.
 
@@ -329,7 +329,7 @@ De givare som används i detta arbete är av en typ som kallas folietöjningsgiv
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.5]{folietöjningsgivare.png}
-    \caption{Folietöjningsgivare}
+    \caption{Folietöjningsgivare \citep{Lindahl1996-ye}}
     \label{fig:folietojningsgivare}
 \end{figure}
 
@@ -373,7 +373,7 @@ I arbetet ligger fokus på att göra det möjligt att undersöka seglets bidrag 
 
 Som det i kapitel \ref{subsect:aerodynamik} framkommer är det inte helt problemfritt att förlita sig på lyftkraftsberäkningar m.hj.a. ekv. \ref{eqn:Fl}. Kurvorna i fig. \ref{fig:cl_re_comp} stämmer bara för ett vingsegel bestående av ett vingelement. Konstrueras seglet av flera element behövs data om hela seglets egenskaper som inte direkt går att härleda från kurvorna för enskilda element. Skilda kurvor behövs också för olika relativa vinklar mellan det främre och det bakre elementet.
 
-En enkel tvådimesionell modell som beskriver båten med köl och seglet vid fortfarighet såsom den som nämnts tidigare under avsnitt \ref{subsect:aerodynamik} kan inte svara på frågor om vad som händer i en verklig situation när båten kränger. En modell som tar detta i beaktande blir mer komplex och syftet för arbetet är att ta fram en mätmetod som kan ge svar på vad som händer ovanför vattenytan genom experimentell mätning av kraften från seglet.
+En enkel tvådimensionell modell som beskriver båten med köl och seglet vid fortfarighet såsom den som nämnts tidigare under avsnitt \ref{subsect:aerodynamik} kan inte svara på frågor om vad som händer i en verklig situation när båten kränger. En modell som tar detta i beaktande blir mer komplex och syftet för arbetet är att ta fram en mätmetod som kan ge svar på vad som händer ovanför vattenytan genom experimentell mätning av kraften från seglet.
 
 Med instrumentering av masten kan kraften seglet skapar mätas direkt till skillnad från att förlita sig på skenbar vindriktning och hastighet samt $C_L$ och $C_D$ tabeller.
 
@@ -393,24 +393,29 @@ Arbetet inleds med  ett planeringsskede genom att göra en 3D CAD-modell av ett 
 
 Masten består av ett kolfiberkompositrör och töjningsgivare monteras på denna. För kalibrering behövs en speciell anordning, \emph{jigg}, vars konstruktion ses i figur \ref{fig:jigg}. I denna kan masten böjas åt fyra olika håll genom att hänga upp en känd vikt fäst i röret via ett block. Genom att läsa av alla givare när röret endast böjs åt ett håll i taget kan möjliga fel i mätningarna kalibreras bort.
 
-Metoden med töjningsgivare på masten är inspirerad av mätningar gjorda i \citep{Pellicioli2010-mg} där kraferna mättes för en segelbåt klass 420 med syftet att göra mer noggranna hållfasthetsberäkningar.
+Metoden med töjningsgivare på masten är inspirerad av mätningar gjorda i \citep{Pellicioli2010-mg} där krafterna mättes för en segelbåt klass 420 med syftet att göra mer noggranna hållfasthetsberäkningar.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.7]{Calibration jig v14.png}
-    \caption{Kalibreringsjigg för töjningsgivare}
+    \includegraphics[scale=.25]{kalibreringsjigg.jpg}
+    \caption{Visualisering av kalibreringsjigg för töjningsgivare}
     \label{fig:jigg}
 \end{figure}
 
-Själva seglet och en artikulerad plattform är också planerade att konstrueras. Masten kan roteras, vingseglets bakre element kan vinklas i förhållande till det främre och hela seglet kan roteras horisontellt för att simulera krängning. Seglet är konstruerat helt genom 3D-utskrifter.
+Själva seglet och en artikulerad plattform, s.k. mätrigg, är också planerade att konstrueras (fig. \ref{fig:rigg}). Masten kan roteras, vingseglets bakre element kan vinklas i förhållande till det främre och hela seglet kan roteras horisontellt för att simulera krängning. Seglet är konstruerat helt genom 3D-utskrifter.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.25]{mätrigg.jpg}
+    \caption{Visualisering av mätrigg}
+    \label{fig:rigg}
+\end{figure}
 
 För att programmatiskt kunna artikulera mätutrustningen behövs servomotorer med tillräckligt vridmoment. Dessa är konstruerade utav likströmsmotorer med snäckväxel som ger hög utväxling och liten möjlighet till att drivas i backriktningen, vilket får komponenterna att hålla sin position trots yttre påfrestningar. En vanligt förekommande sådan kombination av motor och växellåda finns i vindrutetorkare för bilar. Motorerna är kopplade till en 12 V drivenhet och den utgående axeln är försedd med en magnetisk encoder. Detta kombinerat med en mikrokontoller som sköter positionsregleringen blir en billig och framförallt effektiv servostyrning.
 
 \chapter{Design och konstruktion}\label{chapt:design_konstr}
 
 Processen av att planera och bygga utrustningen har omfattat en markant del av tidsåtgången i arbetet. Medan kalibreringen tog ett par eftermiddagar slukade det förutnämnda månader. Därför anses en beskrivning av hur det hela gick från plan till förverkligande vara viktig och förhoppningsvis intressant.
-
-Mättekniskt 
 
 De mekaniska lösningarna för mätutrustningen är framtagna med hjälp av Autodesk Fusion 360 och en FDM 3D-skrivare. Vingen är förutom servomotorn och masten framställd som en 3D-utskrift. Arbetet med de mekaniska lösningarna kring seglet har avsiktligen valts att förverkligas med denna s.k. \emph{rapid prototyping}-teknik för att iterativt kunna söka fram en optimal design.
 
@@ -464,8 +469,6 @@ Givarna fästes med epoxy som på prototypen (fig. \ref{fig:mast_2} och \ref{fig
     \label{fig:mast_2}
 \end{figure}
 
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.5, trim={0mm 10mm 40mm 60mm},clip]{IMG_0448_korr.jpg} % left bottom right top
@@ -495,15 +498,32 @@ Givarna kopplades därför ihop till två bryggor och sedan vidare till två mä
 
 Ett relativt omfattande labviewprogram förbereddes för kalibrering och mätningar med bryggan.
 
-Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man behöver gå igenom för att först samla data för kalibreringen, sedan utföra en linjär anpassning av samlad data och till sist utföra mätningar och lagra data.
+Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man behöver gå igenom för att först samla data för kalibreringen, sedan utföra en linjär anpassning av samlad data och till sist utföra mätningar och lagra data. Dessa presenteras i figurerna \ref{fig:prog_cal}, \ref{fig:prog_fit} och \ref{fig:prog_meas}.
 
-\todo{screenshots från labview}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{lw_calibration.PNG}
+    \caption{Kalibreringsvy i labviewprogrammet}
+    \label{fig:prog_cal}
+\end{figure}
 
-\section{Mekaniska lösningar}\label{subsect:meklosn}
-\waller{Rubrik? Handlar mer om CAD-lösningar?}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{lw_linear_fit.PNG}
+    \caption{Visualisering av den linjära anpassningen i labviewprogrammet}
+    \label{fig:prog_fit}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{lw_measurement.PNG}
+    \caption{Mätvy i labviewprogrammet}
+    \label{fig:prog_meas}
+\end{figure}
+
+\section{CAD-lösningar}\label{sect:CADlosn}
+
 Konstruktionen av kalibreringsjiggen och plattformen för mätriggen planerades att bestå av fyrkantig aluminiumprofil med s.k. T-formade skenor. Denna typ av profil används vanligtvis för att konstruera automationsutrustning för olika ändamål. Med vinklade fästen som skruvas fast med en speciell mutter i skenan kan anordningarna byggas upp snabbt och de går att justera efter montering. Även om en hopsvetsad konstruktion kan vara styvare är de förutnämnda fördelarna något som gör konstruktionsmetoden väldigt attraktiv.
-
-TODO
 
 Profilen visade sig även vara relativt enkel att jobba med i Fusion 360. En färdig CAD-modell fanns att ladda ner från leverantörens hemsida. Denna kunde sedan importeras in i projektfilen och med hjälp av t.ex. \emph{extrude}-kommandot kunde längden justeras.
 
@@ -513,15 +533,34 @@ När komponenter i en Fusion 360-ritning kopieras och sedan klistras in kan man 
 
 Det är främst de ovannämnda funktionerna som har gjort det möjligt att sköta det iterativa arbetet med att planera mätanordningarna i CAD-programmet utan att ha tillgång till profilerna på förhand. 
 
-\todo{kugghjul}
-
-\section{Servomotorer}\label{subsect:servomotorer}
+\section{Servomotorer}\label{sect:servomotorer}
 
 För att bygga om vindrutetorkarmotorerna till servon användes magnetiska encoders och utvecklingskort med en arduinokompatibel mikrokontroller.
 
-En 3D-utskrift som håller fast den diametriskt polariserade magneten limmades fast på det stora kugghjulet som är kopplat till motorns axel. Ett nytt lock för motorns växelhus som kretskortet med hallgivarchipet kunde fästas vid ritades också upp på basen av en inscannad bild av packningen som satt under det usprungliga locket och skrevs ut. 
+En 3D-utskrift som håller fast den diametriskt polariserade magneten limmades fast på det stora kugghjulet som är kopplat till motorns axel (figur \ref{fig:mot_magn}). Ett nytt lock för motorns växelhus som kretskortet med hallgivarchipet kunde fästas vid ritades också upp på basen av en inscannad bild av packningen som satt under det ursprungliga locket och skrevs ut (fig. \ref{fig:mot_magn}). 
 
-För hastighetsreglering av motorn användes en färdig modul som innehöll en H-brygga, specifikt avsedd för att styra likströmsmotorer. Modulen matades med 12 V spänning från ett labbaggregat som kan leverera en maximal ström på 5 A. Mikrokontrollern programmerades att skicka ut en PWM-signal för det önskade pådraget och en binär signal som anger riktningen till modulen.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.35]{IMG_0337_korr.jpg}
+    \caption{Magnet fastlimmad i vindrutetorkarmotorns växelhus}
+    \label{fig:mot_magn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.1]{lock.jpeg}
+    \caption{Locket som encodern kan fästas vid}
+    \label{fig:mot_lock}
+\end{figure}
+
+För hastighetsreglering av motorn användes en färdig modul som innehöll en H-brygga, specifikt avsedd för att styra likströmsmotorer. Modulen matades med 12 V spänning från ett labbaggregat som kan leverera en maximal ström på 5 A. Mikrokontrollern programmerades att skicka ut en PWM-signal för det önskade pådraget och en binär signal som anger riktningen till modulen. En prototyp av arrangemanget kan ses i figur \ref{fig:mot_proto}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.35]{IMG_0367_korr.jpg}
+    \caption{Prototyp av servomotor}
+    \label{fig:mot_proto}
+\end{figure}
 
 Med de ovannämnda modifikationerna till motorn fanns det nu en möjlighet till att återkopplat reglera rotationsvinkeln av axeln som sticker ut ur växellådan. Till en början gjordes ett försök med att skriva ett kort program i arduino-miljön med hjälp av ett färdigt bibliotek för PID-reglering och ett för att läsa av vinkeln från hallgivaren över SPI-bussen.
 
@@ -529,13 +568,9 @@ Regulatorn ställdes in för hand och det klarnade snabbt att systemet hade fler
 
 Ett nytt försök gjordes senare med att modellera servon och använda supportpaketet för arduino i simulink för att göra en parameteruppskattning och bygga en regulator på detta vis i stället.
 
-Mikrokontrollern programmerades med ett arduinoprogram som läser in vinkeln från encodern och rapporterar tillbaka värdet över serieporten till datorn. Programmet 
+Mikrokontrollern programmerades med ett arduinoprogram som läser in vinkeln från encodern och rapporterar tillbaka värdet över serieporten till datorn. Programmet tar också emot ett värde mellan -255 och 255 för motorpådraget. Negativa värden får motorn att gå moturs och positiva medurs.
 
-TODO: Resten av stycket från chromebooken
-
-TODO: Problem med flera encoders till samma arduino
-
-
+En simulinkmodell som skickar ut  byggdes 
 
 \chapter{Teoretisk beräkning av givarutslag}\label{chapt:teoretisk_berakn}
 
@@ -589,7 +624,7 @@ Utifrån diskussionen ovan kan man då med fel valt belastningsfall i planerings
 
 \chapter{Experiment}\label{chapt:experiment}
 
-Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, som diskuteras i avsnitt \ref{subsect:kraftmätning}.
+Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, som diskuteras i avsnitt \ref{subsect:kraftmatning}.
 
 Inför kalibreringen monteras masten i kalibreringsjiggen så att bryggorna orienteras vinkelrätt mot de fyra sidorna av jiggens ram. En brygga kan då mäta böjningen i riktningen vänster -- höger och den andra i fram- och bakled ovanifrån sett. Kända vikter hängs en och en från samma punkt på masten via ett av blocken och riktningen, vikten, samt värdet från båda AD-omvandlare sparas i en tabell i kalibreringsprogrammet.
 
@@ -637,7 +672,7 @@ I figurerna \ref{fig:meas_polar} och \ref{fig:meas} presenteras samma mätdata; 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Polar plot of measured values.pdf}
-    \caption{Polär graf över uppmätta värden efter kalibrering}
+    \caption{Polär graf över beräknad magnitud efter kalibrering}
     \label{fig:meas_polar}
 \end{figure}
 
@@ -646,22 +681,98 @@ Figur \ref{fig:meas} nedan ger i sin tur en klarare bild av mätutrustningens ka
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1]{Measured values.pdf}
-    \caption{Uppmätta värden efter kalibrering}
+    \caption{Beräknad magnitud utifrån kalibrerade värden}
     \label{fig:meas}
+\end{figure}
+
+Nedan ses figur \ref{fig:meas_2} i vilken mätvärden från båda bryggorna presenteras tillsammans med den beräknade magnituden.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1]{Measured values and magnitude.pdf}
+    \caption{Uppmätta värden efter kalibrering och beräknad magnitud}
+    \label{fig:meas_2}
 \end{figure}
 
 \section{Analys}\label{sect:analys}
 
-Det som är mest iögonfallande i speciellt figur \ref{fig:meas}, men också i en polär graf då skalan justerats som i figur \ref{fig:meas_polar}, är att mätpunkterna faller på en linje mellan 0° och 45°, 45° och 90°, o.s.v.
+Det som är mest iögonfallande speciellt i figur \ref{fig:meas}, men också i en polär graf då skalan justerats som i figur \ref{fig:meas_polar}, är att mätpunkterna faller på en linje mellan 0° och 45°, 45° och 90°, o.s.v.
 
-Detta betyder att det går att anpassa en styckevis linjär funktion till mätvärden och använda den för kalibrering av utrustningen. Även om töjningsgivarna är mindre känsliga i sidled blir det kombinerade resultatet från två bryggor vinkelrätt mot varandra linjärt. Detta hade inte varit lätt att förutspå.
+Detta betyder att det går att anpassa en styckevis linjär funktion till mätvärden och använda den för kalibrering av utrustningen.
+
+Gällande diskussionen om tvärkänsligheten i kapitel \ref{subsect:kraftmatning} där \citep{Lindahl1996-ye} refererats verkar det som att resultaten av mätningarna tyder på att känsligheten nog direkt i tvärriktningen är obefintlig som figur \ref{fig:meas_f} visar. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.75]{Measurement front only.pdf} % left,bottom,right,top
+    \caption{Uppmätta värden vid mätning för polärdiagram. Endast värden från bryggan i neutral -- framriktningen visas då belastningen gradvis flyttas medurs mot höger ovanifrån sett}
+    \label{fig:meas_f}
+\end{figure}
+
+Det är uppenbarligen möjligt att montera mätbryggorna vinkelrätt mot varandra för att kontra deras brist på tvärkänslighet.
 
 \chapter{Slutsatser}\label{chapt:slutsatser}
 
 \section{Vidareutveckling}\label{sect:vidareutveckling}
 Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Kalibreringsfaktorerna som programmet räknar ut gäller m.a.o. endast när masten är monterad på exakt samma sätt och när den belastas från samma punkt. Det skulle kunna utforskas om man kunde överföra mätvärden från ett belastningsfall till ett annat förutsatt att de båda motsvarar verkligheten så bra som möjligt. Då kunde t.ex. en bar mast kalibreras och mätningar göras när seglet monterats utan att behöva kalibrera om givarna. Olika fall kunde utforskas genom att montera töjningsgivare på flera ställen längs masten. Viktiga punkter att mäta på är speciellt där förändringar i skjuvkraften förväntas hända.
 
-\chapter{Bilagor}\label{chapt:bilagor}
+\appendix
+\chapter{Ritningar}\label{chapt:ritningar}
+\newpage
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=1,scale=.5, angle=90,origin=c]{Calibration jig Drawing v9.pdf}
+    \label{fig:c_jig_p1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=2,scale=.5, angle=90,origin=c]{Calibration jig Drawing v9.pdf}
+    \label{fig:c_jig_p2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=3,scale=.5, angle=90,origin=c]{Calibration jig Drawing v9.pdf}
+    \label{fig:c_jig_p3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=1,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=2,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=3,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=4,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=6,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p6}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=7,scale=.5, angle=90,origin=c]{Measurement rig Drawing v10.pdf}
+    \label{fig:m_rig_p7}
+\end{figure}
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography.bib}
