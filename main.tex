@@ -103,7 +103,7 @@
     \vspace{0.5cm}
 		
 	% Set the date
-	{\normalsize 15-10-2021 \par}
+	{\normalsize 18-4-2022 \par}
 	
 	\pagebreak
 
@@ -523,54 +523,29 @@ Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man b
 
 \section{CAD-lösningar}\label{sect:CADlosn}
 
-Konstruktionen av kalibreringsjiggen och plattformen för mätriggen planerades att bestå av fyrkantig aluminiumprofil med s.k. T-formade skenor. Denna typ av profil används vanligtvis för att konstruera automationsutrustning för olika ändamål. Med vinklade fästen som skruvas fast med en speciell mutter i skenan kan anordningarna byggas upp snabbt och de går att justera efter montering. Även om en hopsvetsad konstruktion kan vara styvare är de förutnämnda fördelarna något som gör konstruktionsmetoden väldigt attraktiv.
+Konstruktionen av kalibreringsjiggen och plattformen för mätriggen planerades att bestå av fyrkantig aluminiumprofil med s.k. T-formade skenor, fig. \ref{fig:aluprofil}. Denna typ av profil används vanligtvis för att konstruera automationsutrustning för olika ändamål. Med vinklade fästen som skruvas fast med en speciell mutter i skenan kan anordningarna byggas upp snabbt och de går att justera efter montering. Även om en hopsvetsad konstruktion kan vara styvare är de förutnämnda fördelarna något som gör konstruktionsmetoden väldigt attraktiv.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[page=1,scale=.5, trim={550 350 100 200},clip]{Motedis Profile 40x40L I-Type slot 8 v1 Drawing v3} % left,bottom,right,top
+    \caption{40x40 mm aluminiumprofil}
+    \label{fig:aluprofil}
+\end{figure}
 
 Profilen visade sig även vara relativt enkel att jobba med i Fusion 360. En färdig CAD-modell fanns att ladda ner från leverantörens hemsida. Denna kunde sedan importeras in i projektfilen och med hjälp av t.ex. \emph{extrude}-kommandot kunde längden justeras.
 
 I stället för att använda \emph{move}-kommandot för att flytta bitarna på plats definierades fästpunkter, s.k. \emph{joints}, som gjorde att modellen förblev parametrisk. Detta betyder att det gick att gå tillbaka i historiken över utförda operationer och ändra på t.ex. längden av en profil utan att modellen går sönder när man återgår till den senaste operationen. Genom att sätta in en fästpunkt i ändan på en profil och fästa en annan i punkten bildas automatiskt en relativ position mellan de två komponenterna. Om den första profilen flyttas eller ändrar längd fästs nästa profil fortfarande vid ändan oavsett vilken den nya absoluta positionen för joint-objektet har blivit.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.35, trim={0 0 0 50},clip]{joints.png} % left,bottom,right,top
+    \caption{Markörer för fästpunkter i 3D-modellen}
+    \label{fig:joints}
+\end{figure}
+
 När komponenter i en Fusion 360-ritning kopieras och sedan klistras in kan man välja mellan att skapa en ny komponent som är helt fristående från den ursprungliga eller som en sorts referens. Ändras originalet kommer referensen också att påverkas av samma operation. Detta påverkar dock inte operationer som har med joints att göra. Fördelarna med att arbeta med referenser är att det i modellen ofta finns flera profiler som är lika långa och görs kopiorna som referenser kommer det att gå snabbt att redigera alla på en gång. När man sedan skapar en ritning utav 3D CAD-modellen och infogar en tabell över komponenter kommer de som kopierats som referenser att samlas på samma rad med en kolumn som anger antalet likadana komponenter. På så vis blir det enklare att göra beställningar när listan över delar automatiskt uppdateras.
 
 Det är främst de ovannämnda funktionerna som har gjort det möjligt att sköta det iterativa arbetet med att planera mätanordningarna i CAD-programmet utan att ha tillgång till profilerna på förhand. 
-
-\section{Servomotorer}\label{sect:servomotorer}
-
-För att bygga om vindrutetorkarmotorerna till servon användes magnetiska encoders och utvecklingskort med en arduinokompatibel mikrokontroller.
-
-En 3D-utskrift som håller fast den diametriskt polariserade magneten limmades fast på det stora kugghjulet som är kopplat till motorns axel (figur \ref{fig:mot_magn}). Ett nytt lock för motorns växelhus som kretskortet med hallgivarchipet kunde fästas vid ritades också upp på basen av en inscannad bild av packningen som satt under det ursprungliga locket och skrevs ut (fig. \ref{fig:mot_magn}). 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=.35]{IMG_0337_korr.jpg}
-    \caption{Magnet fastlimmad i vindrutetorkarmotorns växelhus}
-    \label{fig:mot_magn}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=.1]{lock.jpeg}
-    \caption{Locket som encodern kan fästas vid}
-    \label{fig:mot_lock}
-\end{figure}
-
-För hastighetsreglering av motorn användes en färdig modul som innehöll en H-brygga, specifikt avsedd för att styra likströmsmotorer. Modulen matades med 12 V spänning från ett labbaggregat som kan leverera en maximal ström på 5 A. Mikrokontrollern programmerades att skicka ut en PWM-signal för det önskade pådraget och en binär signal som anger riktningen till modulen. En prototyp av arrangemanget kan ses i figur \ref{fig:mot_proto}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=.35]{IMG_0367_korr.jpg}
-    \caption{Prototyp av servomotor}
-    \label{fig:mot_proto}
-\end{figure}
-
-Med de ovannämnda modifikationerna till motorn fanns det nu en möjlighet till att återkopplat reglera rotationsvinkeln av axeln som sticker ut ur växellådan. Till en början gjordes ett försök med att skriva ett kort program i arduino-miljön med hjälp av ett färdigt bibliotek för PID-reglering och ett för att läsa av vinkeln från hallgivaren över SPI-bussen.
-
-Regulatorn ställdes in för hand och det klarnade snabbt att systemet hade flera olinjära egenskaper. Motorn gick dels fortare åt det ena hållet än det andra och det fanns en markant dödzon vid små värden för styrsignalen. Dessa egenskaper gjorde det svårt att använda någon sorts tumregelsmetod för att komma fram till välfungerande värden för regulatorns förstärkningar utan att ha en modell som beskrev systemet. Det gick att ställa in regulatorn så att den fungerade väl vid antingen stora eller små förändringar av börvärdet men ingen optimal inställning hittades för att klara båda fallen. Ett försök gjordes med att använda olika förstärkningar för olika magnituder på reglerfelet och att introducera en olinjäritet efter regulatorn som fungerade som modell för dödzonen. Regulatorn blev dock ännu svårare att ställa in.
-
-Ett nytt försök gjordes senare med att modellera servon och använda supportpaketet för arduino i simulink för att göra en parameteruppskattning och bygga en regulator på detta vis i stället.
-
-Mikrokontrollern programmerades med ett arduinoprogram som läser in vinkeln från encodern och rapporterar tillbaka värdet över serieporten till datorn. Programmet tar också emot ett värde mellan -255 och 255 för motorpådraget. Negativa värden får motorn att gå moturs och positiva medurs.
-
-En simulinkmodell som skickar ut  byggdes 
 
 \chapter{Teoretisk beräkning av givarutslag}\label{chapt:teoretisk_berakn}
 
@@ -583,6 +558,8 @@ Ju mer utbredd belastningen är över masten desto mindre blir böjmomentet i en
 Det är böjmomentet som tillsammans med materialkonstanter slutligen ger töjningen man mäter med givarna, påvisat av ekvationerna \ref{eqn:tojning2}, \ref{eqn:spanning}, \ref{eqn:gauge_factor} och \ref{eqn:obalansspanning_}. 
 
 När det gäller placeringen och valet av töjningsgivare borde man se till att  givarnas maximala utslag inte mättar AD-omvandlarens förstärkarsteg. Blir utslaget för litet får man problem med kvoten mellan signal och brus.
+
+\section{Val av belastningsfall}
 
 I \citep{Sponberg1983-li} presenteras en metod för att dimensionera fristående vingmaster för fritids- och tävlingssegelbåtar. Hållfasthetsberäkningarna i rapporten är upplagda så att en så stor säkerhetsmarginal som möjligt erhålls. Eftersom krafterna förutsätts vara punktformiga fås större böjmoment än om man räknat med att seglet fästs längs hela liket i masten och då skulle kunna räknas som en utbredd belastning. Om man räknat enligt det förstnämnda fallet och lagt på en viss säkerhetsmarginal för mastens konstruktion men det verkliga fallet är mer som det senare fallet kommer man att få en ytterligare marginal. Denna marginal är dock inte helt gratis då man får en tyngre mast som påverkar stabiliteten negativt. Ska masten dessutom roteras som i \citep{Sponberg2000-yk} blir lagren som ska stötta rörelsen större, tyngre och framförallt dyrare. När det gäller en ensamsegling runt jorden är kanske extra säkerhetsmarginal att föredra, speciellt då avmastning ofta är orsaken till att den sortens åtaganden måste avbrytas.
 
@@ -621,6 +598,37 @@ Utifrån diskussionen ovan kan man då med fel valt belastningsfall i planerings
     \caption{Skjuvkrafts- och böjmomentsdiagram med jämnt fördelad last}
     \label{fig:moments_df}
 \end{figure}
+
+\section{Beräkning med enkelt belastningsfall}
+
+Med insättning av uttrycket för töjning (ekv. \ref{eqn:tojning2}) i uttrycket för givarfaktorn (ekv. \ref{eqn:gauge_factor}), ytterligare insättning av spänningen från ekv. \ref{eqn:spanning} och utbrytning av den relativa resistansen fås ekvation \ref{eqn:rel_res} nedan.
+
+\begin{equation}
+    r = \frac{kM_b}{EW_b}
+    \label{eqn:rel_res}
+\end{equation}
+
+Allt i högerled förväntas vara känt; $M_b$ från det enkla belastningsfallet där röret är fastspänt i ena ändan och en kraft verkar på friändan, $W_b$ från rörets geometri, $k$ från givartillverkaren och $E$ fås experimentellt med ekvation \ref{eqn:utbojning}.
+
+Högerledet från ekv. \ref{eqn:rel_res} kan vidare sättas in i stället för $r$ i ekv. \ref{eqn:obalansspanning_} för att få ekv. \ref{eqn:Uao1} nedan.
+
+\begin{equation}
+    U_{ao} \approx \frac{kM_bU}{EW_b}
+    \label{eqn:Uao1}
+\end{equation}
+
+Med insättning av högerledet från ekv. \ref{eqn:bojmoment} i stället för $M_b$ och högerledet från ekv. \ref{eqn:bojmotstand} i stället för $W_b$ fås följande uttryck för obalansspänningen i ekv. \ref{eqn:Uao2}.
+
+\begin{equation}
+    U_{ao} \approx \frac{32 k F l U d_2}{\pi E (d_2^4 - d_1^4)}
+    \label{eqn:Uao2}
+\end{equation}
+
+$E$ togs experimentellt fram genom att mäta utböjningen $\delta$ till 15 mm då avståndet $l$ från fästet till punkten där massan på 0,5 kg hängdes var 747 mm. Innerdiametern $d_1$ var 10 mm och ytterdiametern $d_2$ 12 mm. Detta resulterar i en elasticitetsmodul på 86 200 MPa.
+
+Med matningsspänningen $U$ på 5 V, en kraft $F$ på -4,9 N och ett $k$ på 2,1 fås slutligen obalansspänningen till c.a. 4,2 mV m.hj.a. ekv. \ref{eqn:Uao2}.
+
+Det använda HX711-chipets AD-omvandlare ger ut ett 24-bitars värde i tvåkomplementform vilket betyder att det kan ligga mellan -4 194 304 -- 4 194 303. Detta motsvarar obalansspänningar mellan -20 -- 20 mV. 4,2 mV skulle då ge värdet 888 390 från AD-omvandlaren.
 
 \chapter{Experiment}\label{chapt:experiment}
 
@@ -710,6 +718,8 @@ Gällande diskussionen om tvärkänsligheten i kapitel \ref{subsect:kraftmatning
 \end{figure}
 
 Det är uppenbarligen möjligt att montera mätbryggorna vinkelrätt mot varandra för att kontra deras brist på tvärkänslighet.
+
+När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta. 
 
 \chapter{Slutsatser}\label{chapt:slutsatser}
 
