@@ -149,10 +149,10 @@ Ett vingsegel har per definitionen på \citep{Wikipedia_contributors2021-yk} dub
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.7]{Sail NACA2412.pdf}
-    \caption{Profiler för en flygplansvinge (ovan) och en konventionellt segel samt mast (under)}
+    \caption{Profiler för en flygplansvinge (ovan) och ett konventionellt segel samt mast (under)}
     \label{fig:vinge_segel}
 \end{figure}
-g
+
 När det kommer till att jämföra flygplansvingar med vingsegel är det viktigt att beakta den relativa vindhastigheten, d.v.s. vingens hastighet jämfört med den omgivande luftens, som vardera upplever. På grund av förhållandet mellan krafter som motverkar förändringar (tröghet) och friktion (viskositet) hos luften \citep{Benson2021-kn} som beskrivs av ekvation \ref{eqn:Re} beter sig en vinge på olika sätt beroende på hastigheten.
 
 Relativa vindhastigheter för flygplan är ofta långt mycket högre än för vingsegel. En Cessna 172, i figur \ref{fig:cessna}, har en \emph{stallhastighet} på 47 knop, c.a. 87 $\sfrac{\mathrm{km}}{\mathrm{h}}$ eller 24 $\sfrac{\mathrm{m}}{\mathrm{s}}$, med fullt utslag på vingklaffarna \citep{Wikipedia_contributors2022-fm}. Detta betyder att vingen är inställd för största möjliga lyftkraft och att planet inte längre kan öka flyghöjden utan att höja farten \citep{Wikipedia_contributors2022-gk}. Det är ungefär samma hastighet som hastighetsrekordet för en AC72 tävlingskatamaran (fig. \ref{fig:ac72}) \citep{Wikipedia_contributors2021-jo}. Den normala marschfarten för Cessnan, som definitivt inte är något fartvidunder när det kommer till flygplan, är däremot 125 knop, c.a. 232 $\sfrac{\mathrm{km}}{\mathrm{h}}$ eller 64 $\sfrac{\mathrm{m}}{\mathrm{s}}$.
@@ -385,7 +385,7 @@ För segeldrivna farkoster finns det en optimal krängningsvinkel, undersökt av
 
 Arbetet begränsas till mekanisk konstruktion och uppbyggnaden av tillhörande mätsystem. Mer specifikt läggs tyngdpunkten på att bygga och analysera utrustningen för att kalibrera töjningsgivarna på masten.  
 
-Utrustningen för att göra egentliga mätningar, mätriggen, har planerats. Inga mätningar med denna utrustning har utförs inom ramen för arbetet. Den ursprungliga planen omfattade förhoppningar om att kunna utföra mätningar även med seglet. Men p.g.a. omfattningen av de teoretiska och praktiska momenten för enbart kalibreringen var fortsatta mätningar tidsmässigt inte möjliga att genomföra och analysera.
+Utrustningen för att göra egentliga mätningar, mätriggen, har planerats. Inga mätningar med denna utrustning utförs inom ramen för arbetet. Den ursprungliga planen omfattade förhoppningar om att kunna utföra mätningar även med seglet. Men p.g.a. omfattningen av de teoretiska och praktiska momenten för enbart kalibreringen var fortsatta mätningar tidsmässigt inte möjliga att genomföra och analysera.
 
 \chapter{Metod}\label{chapt:metod}
 
@@ -555,7 +555,7 @@ Det är inte helt entydigt hur kraften från seglet breder ut sig över längden
 
 Ju mer utbredd belastningen är över masten desto mindre blir böjmomentet i en given enskild punkt längs den. Böjmomentet är integralen av skjuvkraften som i sin tur beror på hur man valt krafterna i belastningsfallet. Figur \ref{fig:moments_pf} och \ref{fig:moments_df} illustrerar detta.
 
-Det är böjmomentet som tillsammans med materialkonstanter slutligen ger töjningen man mäter med givarna, påvisat av ekvationerna \ref{eqn:tojning2}, \ref{eqn:spanning}, \ref{eqn:gauge_factor} och \ref{eqn:obalansspanning_}. 
+Det är böjmomentet som tillsammans med materialkonstanter som slutligen ger töjningen man mäter med givarna, påvisat av ekvationerna \ref{eqn:tojning2}, \ref{eqn:spanning}, \ref{eqn:gauge_factor} och \ref{eqn:obalansspanning_}. 
 
 När det gäller placeringen och valet av töjningsgivare borde man se till att  givarnas maximala utslag inte mättar AD-omvandlarens förstärkarsteg. Blir utslaget för litet får man problem med kvoten mellan signal och brus.
 
@@ -675,7 +675,7 @@ Kalibreringen sköttes med samma vikter som mätningen planerades att göras med
 
 \section{Mätresultat}\label{sect:matresultat}
 
-I figurerna \ref{fig:meas_polar} och \ref{fig:meas} presenteras samma mätdata; de 32 uppmätta punkterna från 0° till 348,25°. Polärdiagrammet i fig \ref{fig:meas_polar} kan vara mer överskådligt utifrån bakgrunden som ges i början av kapitlet.
+I figurerna \ref{fig:meas_polar} och \ref{fig:meas} presenteras samma data; den beräknade magnituden för de 32 uppmätta punkterna från 0° till 348,25°. Polärdiagrammet i fig \ref{fig:meas_polar} kan vara mer överskådligt utifrån bakgrunden som ges i början av kapitlet.
 
 \begin{figure}[H]
     \centering
@@ -684,7 +684,7 @@ I figurerna \ref{fig:meas_polar} och \ref{fig:meas} presenteras samma mätdata; 
     \label{fig:meas_polar}
 \end{figure}
 
-Figur \ref{fig:meas} nedan ger i sin tur en klarare bild av mätutrustningens karaktäristik. Den streckade referenslinjen motsvarar ett utslag på 500 g i alla riktningar, vilket i polärdiagrammet hade visat sig som en perfekt cirkel.
+Figur \ref{fig:meas} nedan ger i sin tur en klarare bild av mätutrustningens karaktäristik. Den streckade referenslinjen motsvarar en magnitud på 500 g i alla riktningar, vilket i polärdiagrammet hade visat sig som en perfekt cirkel.
 
 \begin{figure}[H]
     \centering
@@ -719,14 +719,91 @@ Gällande diskussionen om tvärkänsligheten i kapitel \ref{subsect:kraftmatning
 
 Det är uppenbarligen möjligt att montera mätbryggorna vinkelrätt mot varandra för att kontra deras brist på tvärkänslighet.
 
-När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta. 
+När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta. Det är ändå i samma storleksordning och beräkningen kan användas för att uppskatta
 
 \chapter{Slutsatser}\label{chapt:slutsatser}
+
+Inom ramen för arbetet har en metod tagits fram för att mäta 
 
 \section{Vidareutveckling}\label{sect:vidareutveckling}
 Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Kalibreringsfaktorerna som programmet räknar ut gäller m.a.o. endast när masten är monterad på exakt samma sätt och när den belastas från samma punkt. Det skulle kunna utforskas om man kunde överföra mätvärden från ett belastningsfall till ett annat förutsatt att de båda motsvarar verkligheten så bra som möjligt. Då kunde t.ex. en bar mast kalibreras och mätningar göras när seglet monterats utan att behöva kalibrera om givarna. Olika fall kunde utforskas genom att montera töjningsgivare på flera ställen längs masten. Viktiga punkter att mäta på är speciellt där förändringar i skjuvkraften förväntas hända.
 
 \appendix
+
+\chapter{Kalibrerings- och mätdata}
+
+\begin{table}[H]
+\centering
+\caption{Kalibreringsdata, fram}
+\label{tab:kalib0}
+\begin{tabular}{l|l|l|l}
+\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+0.00            & 98.00                  & 93.75                 & -412.08               \\
+0.00            & 191.00                 & 105.81                & -827.64               \\
+0.00            & 278.00                 & 120.45                & -1217.93              \\
+0.00            & 354.00                 & 122.08                & -1559.53              \\
+0.00            & 416.00                 & 113.01                & -1860.57              \\
+0.00            & 462.00                 & 118.25                & -2061.70              \\
+0.00            & 490.00                 & 113.83                & -2167.56              \\
+0.00            & 500.00                 & 107.24                & -2198.63              \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Kalibreringsdata, höger}
+\label{tab:kalib90}
+\begin{tabular}{l|l|l|l}
+\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+90.00           & 98.00                  & -445.68               & 32.36                 \\
+90.00           & 191.00                 & -912.41               & 16.47                 \\
+90.00           & 278.00                 & -1323.61              & 14.66                 \\
+90.00           & 354.00                 & -1683.39              & 14.05                 \\
+90.00           & 416.00                 & -1989.69              & 8.64                  \\
+90.00           & 462.00                 & -2183.83              & -8.73                 \\
+90.00           & 490.00                 & -2321.14              & -4.03                 \\
+90.00           & 500.00                 & -2342.08              & 3.68                  \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Kalibreringsdata, bak}
+\label{tab:kalib180}
+\begin{tabular}{l|l|l|l}
+\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+180.00          & 98.00                  & -27.64                & 475.71                \\
+180.00          & 191.00                 & -46.72                & 904.45                \\
+180.00          & 278.00                 & -74.05                & 1293.51               \\
+180.00          & 354.00                 & -72.44                & 1619.73               \\
+180.00          & 416.00                 & -79.29                & 1897.59               \\
+180.00          & 462.00                 & -105.61               & 2094.53               \\
+180.00          & 490.00                 & -111.99               & 2211.17               \\
+180.00          & 500.00                 & -104.32               & 2259.73               \end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Kalibreringsdata, vänster}
+\label{tab:kalib270}
+\begin{tabular}{l|l|l|l}
+\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+270.00          & 98.00                  & 427.67                & 16.25                 \\
+270.00          & 191.00                 & 876.47                & 2.09                  \\
+270.00          & 278.00                 & 1281.12               & 7.55                  \\
+270.00          & 354.00                 & 1623.99               & -2.93                 \\
+270.00          & 416.00                 & 1907.31               & 4.88                  \\
+270.00          & 462.00                 & 2128.61               & -1.51                 \\
+270.00          & 490.00                 & 2239.41               & 13.90                 \\
+270.00          & 500.00                 & 2294.89               & 0.86                 
+\end{tabular}
+\end{table}
+
+
+
+
+
 \chapter{Ritningar}\label{chapt:ritningar}
 \newpage
 
