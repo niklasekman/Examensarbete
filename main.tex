@@ -397,7 +397,7 @@ Metoden med töjningsgivare på masten är inspirerad av mätningar gjorda i \ci
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.25]{kalibreringsjigg.jpg}
+    \includegraphics[scale=.2]{kalibreringsjigg.jpg}
     \caption{Visualisering av kalibreringsjigg för töjningsgivare}
     \label{fig:jigg}
 \end{figure}
@@ -406,7 +406,7 @@ Själva seglet och en artikulerad plattform, s.k. mätrigg, är också planerade
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.25]{mätrigg.jpg}
+    \includegraphics[scale=.2]{mätrigg.jpg}
     \caption{Visualisering av mätrigg}
     \label{fig:rigg}
 \end{figure}
@@ -688,7 +688,7 @@ Figur \ref{fig:meas} nedan ger i sin tur en klarare bild av mätutrustningens ka
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{Measured values.pdf}
+    \includegraphics[scale=.75]{Measured values.pdf}
     \caption{Beräknad magnitud utifrån kalibrerade värden}
     \label{fig:meas}
 \end{figure}
@@ -697,7 +697,7 @@ Nedan ses figur \ref{fig:meas_2} i vilken mätvärden från båda bryggorna pres
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{Measured values and magnitude.pdf}
+    \includegraphics[scale=.75]{Measured values and magnitude.pdf}
     \caption{Uppmätta värden efter kalibrering och beräknad magnitud}
     \label{fig:meas_2}
 \end{figure}
@@ -719,14 +719,19 @@ Gällande diskussionen om tvärkänsligheten i kapitel \ref{subsect:kraftmatning
 
 Det är uppenbarligen möjligt att montera mätbryggorna vinkelrätt mot varandra för att kontra deras brist på tvärkänslighet.
 
-När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta. Det är ändå i samma storleksordning och beräkningen kan användas för att uppskatta
+När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta.
 
-\chapter{Slutsatser}\label{chapt:slutsatser}
+Hade något av de andra belastningsfallen använts vore böjmomentet och det teoretiska värdet mindre. Vad som kan påverka de praktiska resultaten är t.ex. monteringssättet; många givartillverkare föreslår akrylatbaserat lim för att fästa dem på mätobjektet. De använda givarna var billiga generella givare där den enda informationen som fanns till hands var den nominella resistansen och givarkonstanten.
 
-Inom ramen för arbetet har en metod tagits fram för att mäta 
+Oavsett möjliga problem som beror på monteringssätt är det tydligt ur ekv. \ref{eqn:obalansspanning} att vad man får är ett ungefärligt värde för obalansspänningen.
 
-\section{Vidareutveckling}\label{sect:vidareutveckling}
-Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätning. Kalibreringsfaktorerna som programmet räknar ut gäller m.a.o. endast när masten är monterad på exakt samma sätt och när den belastas från samma punkt. Det skulle kunna utforskas om man kunde överföra mätvärden från ett belastningsfall till ett annat förutsatt att de båda motsvarar verkligheten så bra som möjligt. Då kunde t.ex. en bar mast kalibreras och mätningar göras när seglet monterats utan att behöva kalibrera om givarna. Olika fall kunde utforskas genom att montera töjningsgivare på flera ställen längs masten. Viktiga punkter att mäta på är speciellt där förändringar i skjuvkraften förväntas hända.
+\chapter{Sammanfattning och slutsatser}\label{chapt:slutsatser}
+
+En metod har tagits fram för att mäta kraften som utövas på en kolfiberkompositmast. Denna metod kan användas för att mäta kraften som ett segel på en ostagad mast skapar. Seglet som planerats att användas för fortsatta mätningar är ett tvåkomponents vingsegel.
+
+Kraften mäts med två mätbryggor med fyra folietöjningsgivare var, monterade vinkelrätt mot varandra. Konfigurationen ger ett överraskande gott resultat trots givarnas begränsade känslighet i tvärriktningen.
+
+Teoretiska beräkningar har gjorts för att kunna jämföras med de praktiska experimenten och de överensstämmer tillfredställande.
 
 \appendix
 
@@ -737,7 +742,7 @@ Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätni
 \caption{Kalibreringsdata, fram}
 \label{tab:kalib0}
 \begin{tabular}{l|l|l|l}
-\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+\textbf{Vinkel °} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde H-V} & \textbf{Mätvärde F-B} \\ \hline
 0.00            & 98.00                  & 93.75                 & -412.08               \\
 0.00            & 191.00                 & 105.81                & -827.64               \\
 0.00            & 278.00                 & 120.45                & -1217.93              \\
@@ -754,7 +759,7 @@ Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätni
 \caption{Kalibreringsdata, höger}
 \label{tab:kalib90}
 \begin{tabular}{l|l|l|l}
-\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+\textbf{Vinkel °} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde H-V} & \textbf{Mätvärde F-B} \\ \hline
 90.00           & 98.00                  & -445.68               & 32.36                 \\
 90.00           & 191.00                 & -912.41               & 16.47                 \\
 90.00           & 278.00                 & -1323.61              & 14.66                 \\
@@ -771,7 +776,7 @@ Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätni
 \caption{Kalibreringsdata, bak}
 \label{tab:kalib180}
 \begin{tabular}{l|l|l|l}
-\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+\textbf{Vinkel °} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde H-V} & \textbf{Mätvärde F-B} \\ \hline
 180.00          & 98.00                  & -27.64                & 475.71                \\
 180.00          & 191.00                 & -46.72                & 904.45                \\
 180.00          & 278.00                 & -74.05                & 1293.51               \\
@@ -788,7 +793,7 @@ Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätni
 \caption{Kalibreringsdata, vänster}
 \label{tab:kalib270}
 \begin{tabular}{l|l|l|l}
-\textbf{Vinkel} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde R-L} & \textbf{Mätvärde F-B} \\ \hline
+\textbf{Vinkel °} & \textbf{Massa {[}g{]}} & \textbf{Mätvärde H-V} & \textbf{Mätvärde F-B} \\ \hline
 270.00          & 98.00                  & 427.67                & 16.25                 \\
 270.00          & 191.00                 & 876.47                & 2.09                  \\
 270.00          & 278.00                 & 1281.12               & 7.55                  \\
@@ -800,6 +805,57 @@ Samma belastningsfall måste tillämpas praktiskt vid kalibrering som vid mätni
 \end{tabular}
 \end{table}
 
+
+
+\begin{table}[]
+\centering
+\caption{Mätdata}
+\label{tab:mat1}
+\begin{tabular}{l|l|l|l}
+\textbf{Kalibrerat värde F-B {[}g{]}} & \textbf{Kalibrerat värde H-V {[}g{]}} & \textbf{Beräknad magnitud {[}g{]}} & \textbf{Vinkel °} \\ \hline
+495.18                                & -23.88                                & 495.75                             & 357.24            \\
+475.80                                & 63.29                                 & 479.99                             & 7.58              \\
+446.66                                & 150.79                                & 471.43                             & 18.65             \\
+394.42                                & 237.95                                & 460.63                             & 31.10             \\
+331.31                                & 308.71                                & 452.84                             & 42.98             \\
+259.86                                & 377.30                                & 458.13                             & 55.44             \\
+179.69                                & 432.48                                & 468.33                             & 67.44             \\
+90.52                                 & 462.14                                & 470.92                             & 78.92             \\
+0.83                                  & 487.80                                & 487.80                             & 89.90             \\
+-87.25                                & 469.72                                & 477.75                             & 100.52            \\
+-172.10                               & 440.12                                & 472.57                             & 111.36            \\
+-253.54                               & 393.50                                & 468.10                             & 122.79            \\
+-323.51                               & 328.94                                & 461.37                             & 134.52            \\
+-393.39                               & 258.49                                & 470.72                             & 146.69            \\
+-447.07                               & 178.59                                & 481.42                             & 158.22            \\
+-481.11                               & 98.43                                 & 491.08                             & 168.44            \\
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Mätdata forts.}
+\label{tab:mat2}
+\begin{tabular}{l|l|l|l}
+\textbf{Kalibrerat värde F-B {[}g{]}} & \textbf{Kalibrerat värde H-V {[}g{]}} & \textbf{Beräknad magnitud {[}g{]}} & \textbf{Vinkel °} \\ \hline
+-499.84                               & 7.39                                  & 499.89                             & 179.15            \\
+-481.07                               & -77.22                                & 487.23                             & 189.12            \\
+-448.22                               & -169.81                               & 479.31                             & 200.75            \\
+-398.69                               & -251.34                               & 471.30                             & 212.23            \\
+-330.76                               & -322.80                               & 462.17                             & 224.30            \\
+-257.46                               & -388.53                               & 466.09                             & 236.47            \\
+-177.18                               & -448.71                               & 482.42                             & 248.45            \\
+-88.27                                & -487.47                               & 495.40                             & 259.74            \\
+3.22                                  & -513.02                               & 513.03                             & 270.36            \\
+92.05                                 & -495.07                               & 503.56                             & 280.53            \\
+178.51                                & -464.81                               & 497.91                             & 291.01            \\
+258.62                                & -413.09                               & 487.37                             & 302.05            \\
+328.37                                & -351.73                               & 481.19                             & 313.03            \\
+393.81                                & -278.69                               & 482.45                             & 324.71            \\
+445.83                                & -194.24                               & 486.31                             & 336.46            \\
+475.39                                & -114.61                               & 489.01                             & 346.45           
+\end{tabular}
+\end{table}
 
 
 
