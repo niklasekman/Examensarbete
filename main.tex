@@ -133,7 +133,7 @@ Projektet Oceanbird som utvecklas av ett gemensamt företag mellan Wallenius Mar
 
 Vingsegel har enligt \citep{Milic_Kralj2016-vl} möjligheten att uppnå högst kvot mellan lyftkoefficient och vindmotstånd av de segelriggar som jämförts och är därför de mest intressanta att användas på en båt eller ett fartyg när alternativa driftsätt utvärderas.
 
-Det är inte helt oöverraskande att man t.ex. oftast väljer ett vingsegel även när det handlar om robotsegelbåtar \citep{Enqvist2016-xw}.
+Det är inte helt överraskande att man t.ex. oftast väljer ett vingsegel även när det handlar om robotsegelbåtar \citep{Enqvist2016-xw}.
 
 Eftersom det antagligen kommer att byggas en hel del båtar med vingsegel i framtiden är det intressant att ta reda på hur riggarna fungerar i praktiken. Vilka givare ger relevanta signaler med tanke på styrning och övervakning och vilka data hjälper till att ta fram bättre modeller av riggarna.
 
@@ -149,7 +149,7 @@ Ett vingsegel har per definitionen på \citep{Wikipedia_contributors2021-yk} dub
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.7]{Sail NACA2412.pdf}
-    \caption{Profiler för en flygplansvinge (ovan) och ett konventionellt segel samt mast (under)}
+    \caption{Profiler för en flygplansvinge (ovan) och ett konventionellt segel samt mast (under)\waller{Varifrån är bilden? Brukar vara noga med referenser för bilder.}}
     \label{fig:vinge_segel}
 \end{figure}
 
@@ -243,7 +243,8 @@ Ekvation \ref{eqn:Fl} kan användas för att beräkna seglets lyftkraft utifrån
     \label{eqn:Fl}
 \end{equation}
 
-$C_l$ tas fram antingen experimentellt i vintunnel eller genom simulering vid olika attackvinklar av vingen mot luftströmmen. Koefficienten gäller för ett visst Reynoldstal, $Re$, som kan ses som en skalfaktor \citep{Enqvist2016-xw} som beaktar en karakteristisk dimension som oftast är vingens längd i tvärsnittet $L$, fluidens hastighet $v$ och fluidens dynamiska viskositet $\mu$ \citep{Waller_undated-el}. 
+$C_l$ tas fram antingen experimentellt i vindtunnel eller genom simulering vid olika attackvinklar av vingen mot luftströmmen. Koefficienten gäller för ett visst Reynoldstal, $Re$ 
+\waller{(strikt taget skall man skriva Reynolds tal som $\mathrm{Re}$, lutande bokstäver $Re$ betecknar matematiskt produkten av $R$ med $e$)}, som kan ses som en skalfaktor \citep{Enqvist2016-xw} som beaktar en karakteristisk dimension som oftast är vingens längd i tvärsnittet $L$, fluidens hastighet $v$ och fluidens dynamiska viskositet $\mu$ \citep{Waller_undated-el}. 
 
 \begin{equation}
     Re = \frac{vL}{\mu}
@@ -305,7 +306,7 @@ För ett rör såsom masten i detta arbete beskrivs $W_b$ av ekvation \ref{eqn:b
     \label{eqn:bojmotstand}
 \end{equation}
 
-Så länge som förhållandet mellan $\sigma$ och $\varepsilon$ är linjärt kan utböjningen $\delta$ bestämmas med lätthet. För samma belastningsfall som för ekv. \ref{eqn:bojmoment} ges $\delta$ av ekv. \ref{eqn:utbojning}. Samma ekvation kan användas för att uppskatta $E$ utifrån experimentell data. Tröghetsmomentet $I_x$ för ett rör ges av ekvation \ref{eqn:troghet}.
+Så länge som förhållandet mellan $\sigma$ och $\varepsilon$ är linjärt kan utböjningen $\delta$ bestämmas med lätthet. För samma belastningsfall som för ekv. \ref{eqn:bojmoment} ges $\delta$ av ekv. \ref{eqn:utbojning}. Samma ekvation kan användas för att uppskatta $E$ utifrån experimentell data. Tröghetsmomentet $I_x$ för ett rör \waller{Gäller detta för ett rör som kan rotera kring ena ändan?} ges av ekvation \ref{eqn:troghet}.
 
 \begin{equation}
     \delta = \frac{Fl^3}{3EI_x}
@@ -375,7 +376,7 @@ Som det i kapitel \ref{subsect:aerodynamik} framkommer är det inte helt problem
 
 En enkel tvådimensionell modell som beskriver båten med köl och seglet vid fortfarighet såsom den som nämnts tidigare under avsnitt \ref{subsect:aerodynamik} kan inte svara på frågor om vad som händer i en verklig situation när båten kränger. En modell som tar detta i beaktande blir mer komplex och syftet för arbetet är att ta fram en mätmetod som kan ge svar på vad som händer ovanför vattenytan genom experimentell mätning av kraften från seglet.
 
-Med instrumentering av masten kan kraften seglet skapar mätas direkt till skillnad från att förlita sig på skenbar vindriktning och hastighet samt $C_L$ och $C_D$ tabeller.
+Med instrumentering av masten kan kraften seglet skapar mätas direkt till skillnad från att förlita sig på skenbar vindriktning \waller{Dessutom finns antagandet om att den skenbara vindhastigheten är konstant över hela höjden på seglet med, knappast riktigt det heller. Kan också nämnas om du vill.} och hastighet samt $C_L$ och $C_D$ tabeller.
 
 Tabellerna tar inte heller i beaktande andra rådande omständigheter och beräkning av seglets bidrag till krängning eller krängningens bidrag till seglets lyftkraft går inte att härleda direkt från dem.
 
@@ -465,7 +466,7 @@ Givarna fästes med epoxy som på prototypen (fig. \ref{fig:mast_2} och \ref{fig
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.5, trim={15mm 28mm 55mm 80mm},clip]{IMG_0447_korr.jpg} % left bottom right top
-    \caption{Töjningnsgivarna fastlimmade}
+    \caption{Töjningnsgivarna fastlimmade \waller{Det ser ut som de är monterade i rätt riktning?}}
     \label{fig:mast_2}
 \end{figure}
 
@@ -496,9 +497,11 @@ Givarna kopplades därför ihop till två bryggor och sedan vidare till två mä
     \label{fig:mast_5}
 \end{figure}
 
+\waller{Kanske en egen sektion med underrubrik? Och eventuellt en bild av blockschemat för att illustrera LabVIEW-programmering?}
+
 Ett relativt omfattande labviewprogram förbereddes för kalibrering och mätningar med bryggan.
 
-Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man behöver gå igenom för att först samla data för kalibreringen, sedan utföra en linjär anpassning av samlad data och till sist utföra mätningar och lagra data. Dessa presenteras i figurerna \ref{fig:prog_cal}, \ref{fig:prog_fit} och \ref{fig:prog_meas}.
+Programmet har ett gränssnitt som genom flikar är indelat i de tre faser man behöver gå igenom för att först samla data för kalibreringen, sedan utföra en linjär anpassning av samlad data och till sist utföra mätningar och lagra data. Dessa presenteras i figurerna \ref{fig:prog_cal}, \ref{fig:prog_fit} och \ref{fig:prog_meas}. \waller{Kanske man borde förklara lite om gränssnitten och vad användaren behöver göra, dvs val som antal mätningar per riktning, etc.,...}
 
 \begin{figure}[H]
     \centering
@@ -628,15 +631,15 @@ $E$ togs experimentellt fram genom att mäta utböjningen $\delta$ till 15 mm d�
 
 Med matningsspänningen $U$ på 5 V, en kraft $F$ på -4,9 N och ett $k$ på 2,1 fås slutligen obalansspänningen till c.a. 4,2 mV m.hj.a. ekv. \ref{eqn:Uao2}.
 
-Det använda HX711-chipets AD-omvandlare ger ut ett 24-bitars värde i tvåkomplementform vilket betyder att det kan ligga mellan -4 194 304 -- 4 194 303. Detta motsvarar obalansspänningar mellan -20 -- 20 mV. 4,2 mV skulle då ge värdet 888 390 från AD-omvandlaren.
+Det använda HX711-chipets AD-omvandlare ger ut ett 24-bitars värde i tvåkomplementform vilket betyder att det kan ligga mellan -4 194 304 och 4 194 303. Detta motsvarar obalansspänningar mellan -20 och 20 mV. 4,2 mV skulle då ge värdet 888 390 från AD-omvandlaren.
 
 \chapter{Experiment}\label{chapt:experiment}
 
-Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, som diskuteras i avsnitt \ref{subsect:kraftmatning}.
+Det egentliga praktiska experimentet som all tidigare beskriven utrustning och teori bygger mot beskrivs nedan. Det består av två olika skeden, en kalibrering och en mätning. Kalibreringen behöver göras eftersom värdet som fås från AD-omvandlaren inte direkt motsvarar någon känd kraft som verkar på masten \waller{Lite förvillande, i förra kapitlet fick jag uppfattningen att du räknar ut ett teoretiskt fall som beaktar geometri och material och vilket utslag man skulle få? Vad gör då egentligen en skild kalibrering?}. Målet med mätningen är att se hur väl kraften som påverkar masten kan mätas då givarna i de båda bryggorna töjs i en riktning som inte motsvarar deras rekommenderade töjningsriktning, enligt diskussionen i avsnitt \ref{subsect:kraftmatning}. \waller{Å andra sidan förstår jag denna mening, är det då så att det finns ett teoretiskt fall i en viss riktning som man i princip räkna utslaget för?}
 
 Inför kalibreringen monteras masten i kalibreringsjiggen så att bryggorna orienteras vinkelrätt mot de fyra sidorna av jiggens ram. En brygga kan då mäta böjningen i riktningen vänster -- höger och den andra i fram- och bakled ovanifrån sett. Kända vikter hängs en och en från samma punkt på masten via ett av blocken och riktningen, vikten, samt värdet från båda AD-omvandlare sparas i en tabell i kalibreringsprogrammet.
 
-Så länge som materialen befinner sig i den elastiska regionen kommer förhållandet mellan $\sigma$ och $\varepsilon$ vara linjärt. Detta betyder att en linjär anpassning av mätvärden kan göras för att få fram en kalibreringsfaktor. 
+Så länge som materialen befinner sig i den elastiska regionen kommer förhållandet mellan $\sigma$ och $\varepsilon$ vara linjärt \waller{Behöver man beakta att rörets tjocklek i olika riktningar ändras vid böjning, eller är böjningen såpass liten?}. Detta betyder att en linjär anpassning av mätvärden kan göras för att få fram en kalibreringsfaktor. 
 
 När uppmätta kalibreringsvärden för alla vikter i de fyra riktningarna har sparats kan man direkt fortsätta till att göra mätningar eftersom programmet sköter nödvändiga beräkningar bakom kulisserna.
 
@@ -646,7 +649,7 @@ Mätningen med kalibreringsjiggen är tänkt att göras utgående från ett scen
 
 Till en början gjordes en kalibrering med två vikter. Kalibrerade värden mättes sedan upp för de fyra väderstrecken, men också för 45°, 135°, 225° och 315°. Dessa mellanliggande vinklar gav en mindre beräknad magnitud än den teoretiska som skulle vara en faktor $\sqrt{2}$ större än massan av en av de lika stora vikterna som hängts via två av blocken i masten.
 
-Det blev klart att det skulle vara av intresse att veta hur givarna beter sig i områden mellan de redan uppmätta vinklarna. Uppskattningen blev att det praktiskt kunde vara genomförbart och tillräckligt att mäta totalt 32 olika vinklar. Detta betydde 9 vikter varav två var lika stora. Mätningen förbereddes genom att räkna ut vilka vikterna behövde vara för att teoretiskt få ett mätvärde på 500 g vid varje vinkel. Resultatet ritades upp i figur \ref{fig:mass_kalib} och användes för att föra protokoll över vilka vinklar som blivit uppmätta.
+Det blev klart att det skulle vara av intresse att veta hur givarna beter sig i områden mellan de redan uppmätta vinklarna. Uppskattningen blev att det praktiskt kunde vara genomförbart och tillräckligt att mäta totalt 32 olika vinklar. Detta betydde 9 vikter varav två var lika stora. \waller{Inte helt enkelt att förstå denna slutsats} Mätningen förbereddes genom att räkna ut vilka vikterna behövde vara för att teoretiskt få ett mätvärde på 500 g vid varje vinkel. Resultatet ritades upp i figur \ref{fig:mass_kalib} och användes för att föra protokoll över vilka vinklar som blivit uppmätta.
 
 Vikterna framställdes genom att fylla $\sfrac{1}{2}$ liters PET-flaskor med vatten tills önskad vikt nåddes. Vikten mättes med en digital köksvåg.
 
@@ -719,7 +722,7 @@ Gällande diskussionen om tvärkänsligheten i kapitel \ref{subsect:kraftmatning
 
 Det är uppenbarligen möjligt att montera mätbryggorna vinkelrätt mot varandra för att kontra deras brist på tvärkänslighet.
 
-När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta.
+När det kommer till att jämföra det teoretiska värdet från AD-omvandlaren i kapitel \ref{chapt:teoretisk_berakn} till de praktiska mätningarna kan det konstateras att de okalibrerade utslagen för en vikt på 500 g i praktiken låg strax över 2000 medan det teoretiska var nästan 900 000. Orsaken till den stora skillnaden visade sig vara att det i arduinoprogrammet hamnat med ett hårdkodat kalibreringsvärde på 696 för bryggan i vänster -- högerriktning och 733 i fram -- bakriktning. Tas detta i beaktande blir det slutliga teoretiska värdet kring 1200, vilket fortfarande är hälften av det uppmätta. \waller{Och vad har detta egentligen för konsekvenser? Och vad innebär kalibreringen i detta sammanhang?}
 
 Hade något av de andra belastningsfallen använts vore böjmomentet och det teoretiska värdet mindre. Vad som kan påverka de praktiska resultaten är t.ex. monteringssättet; många givartillverkare föreslår akrylatbaserat lim för att fästa dem på mätobjektet. De använda givarna var billiga generella givare där den enda informationen som fanns till hands var den nominella resistansen och givarkonstanten.
 
